@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "BaseViewController.h"
+#import "LoginController.h"
+#import "SearchController.h"
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -19,8 +21,47 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    LoginController * login=[[LoginController alloc]init];
+    UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];
+    BaseViewController *tabBar = [[BaseViewController alloc]init];
+    tabBar.actionDelegate=self;
+      [tabBar addCenterButtonWithImage:[UIImage imageNamed:@"camera_button_take.png"] highlightImage:[UIImage imageNamed:@"tabBar_cameraButton_ready_matte.png"]];
+
+  self.mainNav=[[UINavigationController alloc]initWithRootViewController:[[SearchController alloc]init]];
+    NSArray *tabs=[NSArray arrayWithObject:self.mainNav];
+    [tabBar setViewControllers:tabs];
+    self.window.rootViewController=tabBar;
     [self.window makeKeyAndVisible];
+    
+   [self.mainNav presentViewController:navigation animated:YES completion:nil];
+    
+ 
     return YES;
+}
+-(void)didSelectCenterButton
+{
+    if([self.av isShown])
+    {
+        [self.av dismissAnimated:YES];
+    }
+    else{
+    NSArray *items = @[
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"arrow"] title:@"Next"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"attachment"] title:@"Attach"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"block"] title:@"Cancel"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"Bluetooth"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"Deliver"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"Download"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                       ];
+    NSInteger numberOfOptions = 9;
+    self.av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+    self.av.delegate=self;
+        [self.av showInViewController:self.mainNav center:CGPointMake(self.mainNav.view.bounds.size.width/2.f, self.mainNav.view.bounds.size.height/2.f)];
+   
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
