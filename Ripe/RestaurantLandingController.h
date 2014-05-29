@@ -18,7 +18,10 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *restaurantImageView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+<<<<<<< HEAD
 @property (strong, nonatomic) IBOutlet UIImageView *menuImageView;
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 
 @property (strong, nonatomic) IBOutlet UIImageView *restaurantImage;
 - (id)initWithSearchResult:(SearchResult *)search;

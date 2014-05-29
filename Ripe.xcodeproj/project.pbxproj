@@ -56,8 +56,11 @@
 		29A45F19192BD73D0061364B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A45F18192BD73D0061364B /* CoreLocation.framework */; };
 		29A45F1B192BF3930061364B /* SearchResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A45F1A192BF3930061364B /* SearchResultView.xib */; };
 		29A45F1E192BF6BE0061364B /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A45F1D192BF6BE0061364B /* SearchResult.m */; };
+<<<<<<< HEAD
 		29E8186719368F2900847DB8 /* RipePagePopOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E8186519368F2900847DB8 /* RipePagePopOver.m */; };
 		29E8186819368F2900847DB8 /* RipePagePopOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E8186619368F2900847DB8 /* RipePagePopOver.xib */; };
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 		29F60270192FE3B4006349AB /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 29F60267192FE3B4006349AB /* arrow.png */; };
 		29F60271192FE3B4006349AB /* attachment.png in Resources */ = {isa = PBXBuildFile; fileRef = 29F60268192FE3B4006349AB /* attachment.png */; };
 		29F60272192FE3B4006349AB /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = 29F60269192FE3B4006349AB /* block.png */; };
@@ -142,9 +145,12 @@
 		29A45F1A192BF3930061364B /* SearchResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultView.xib; sourceTree = "<group>"; };
 		29A45F1C192BF6BE0061364B /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
 		29A45F1D192BF6BE0061364B /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		29E8186419368F2900847DB8 /* RipePagePopOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RipePagePopOver.h; sourceTree = "<group>"; };
 		29E8186519368F2900847DB8 /* RipePagePopOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RipePagePopOver.m; sourceTree = "<group>"; };
 		29E8186619368F2900847DB8 /* RipePagePopOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RipePagePopOver.xib; sourceTree = "<group>"; };
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 		29F60267192FE3B4006349AB /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		29F60268192FE3B4006349AB /* attachment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attachment.png; sourceTree = "<group>"; };
 		29F60269192FE3B4006349AB /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
@@ -219,9 +225,12 @@
 				29F60279192FF4FF006349AB /* Menu.xib */,
 				2946FF48192FCDB0004E75CD /* camera_button_take.png */,
 				2946FF49192FCDB0004E75CD /* camera_button_take@2x.png */,
+<<<<<<< HEAD
 				29E8186419368F2900847DB8 /* RipePagePopOver.h */,
 				29E8186519368F2900847DB8 /* RipePagePopOver.m */,
 				29E8186619368F2900847DB8 /* RipePagePopOver.xib */,
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 			);
 			name = "Resturant Landing";
 			sourceTree = "<group>";
@@ -494,7 +503,10 @@
 				299C0686192D2D2D00DC8280 /* pic1.jpg in Resources */,
 				299C0687192D2D2D00DC8280 /* pic2.jpg in Resources */,
 				29A45EEF192BC8150061364B /* Images.xcassets in Resources */,
+<<<<<<< HEAD
 				29E8186819368F2900847DB8 /* RipePagePopOver.xib in Resources */,
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 				29F60275192FE3B4006349AB /* download.png in Resources */,
 				299C0684192D2D2D00DC8280 /* close.png in Resources */,
 				29F60272192FE3B4006349AB /* block.png in Resources */,
@@ -575,7 +587,10 @@
 				29A45F0F192BC8690061364B /* LoginController.m in Sources */,
 				299C0698192D2D6700DC8280 /* DoAlertView.m in Sources */,
 				29A45EE6192BC8140061364B /* main.m in Sources */,
+<<<<<<< HEAD
 				29E8186719368F2900847DB8 /* RipePagePopOver.m in Sources */,
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 				299C0693192D2D5100DC8280 /* UIImage+ResizeMagick.m in Sources */,
 				29A45EED192BC8140061364B /* Ripe.xcdatamodeld in Sources */,
 				29715942192FC69A007FA58C /* BaseViewController.m in Sources */,

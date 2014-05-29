@@ -10,7 +10,11 @@
 #import "SearchResult.h"
 #import "UIImageView+AFNetworking.h"
 #import "AFNetworking.h"
+<<<<<<< HEAD
 #import "RipePagePopOver.h"
+=======
+
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 @interface RestaurantLandingController ()
 
 @end
@@ -31,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+<<<<<<< HEAD
     NSArray *viewAr = [[NSBundle mainBundle] loadNibNamed:@"Menu" owner:self options:nil];
     self.contentMenuView = [viewAr objectAtIndex:0];
     
@@ -39,6 +44,9 @@
      UITapGestureRecognizer *menuImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(MenuImageTouched)];
     [self.menuImageView addGestureRecognizer:menuImage];
     self.menuImageView.userInteractionEnabled = YES;
+=======
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restaurantPhotoTouched)];
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
     self.restaurantImage.userInteractionEnabled=YES;
     [self.restaurantImage addGestureRecognizer:newTap];
     
@@ -79,11 +87,22 @@
 
     
     
+<<<<<<< HEAD
 
 }
 - (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
 {
     
+=======
+    NSArray *viewAr = [[NSBundle mainBundle] loadNibNamed:@"Menu" owner:self options:nil];
+  self.contentMenuView = [viewAr objectAtIndex:0];
+    
+   [self.menuView addSubview:self.contentMenuView];
+}
+- (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
+{
+    self.test.text=@"meow";
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
     
 }
 
@@ -99,7 +118,10 @@ UIImage  *placeHolder=[UIImage imageNamed:@"test"];
                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                               [self.activityIndicator stopAnimating];
                               self.restaurantImage.image=image;
+<<<<<<< HEAD
                               self.menuImageView.image=image.copy;
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                              
                               NSLog(@"REQUEST FAILED");
@@ -111,10 +133,14 @@ else{
 }
 }
 
+<<<<<<< HEAD
 -(void) MenuImageTouched
 {
     [self.navigationController presentViewController:[[RipePagePopOver alloc]init] animated:YES completion:nil];
 }
+=======
+
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
 
 -(void) restaurantPhotoTouched
 {
