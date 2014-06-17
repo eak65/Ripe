@@ -5,12 +5,12 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BE4F5937-9C2A-4A16-8ECE-497898BB536E</string>
+	<string>58591871-0C9A-40E3-B0FD-3B41AA61789B</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Ripe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1F11E697-F6BD-42C5-9D78-31FAB3673A12</key>
+		<key>0A434493-963D-4443-8C59-66B4738FDB2C</key>
 		<string>https://github.com/eak65/Ripe</string>
 		<key>5AE409D9-4FD6-4870-B57D-29C185E51D32</key>
 		<string>https://github.com/eak65/Ripe.git</string>
@@ -19,7 +19,7 @@
 	<string>Ripe.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1F11E697-F6BD-42C5-9D78-31FAB3673A12</key>
+		<key>0A434493-963D-4443-8C59-66B4738FDB2C</key>
 		<string>..</string>
 		<key>5AE409D9-4FD6-4870-B57D-29C185E51D32</key>
 		<string>../../../Desktop/UIKit/Ripe</string>
@@ -29,14 +29,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1F11E697-F6BD-42C5-9D78-31FAB3673A12</string>
+	<string>0A434493-963D-4443-8C59-66B4738FDB2C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1F11E697-F6BD-42C5-9D78-31FAB3673A12</string>
+			<string>0A434493-963D-4443-8C59-66B4738FDB2C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Ripe</string>
 		</dict>
