@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SlidingMenuController">
+            <connections>
+                <outlet property="foodImage" destination="cV1-pT-odE" id="aNA-F4-JM5"/>
+                <outlet property="foodNameLabel" destination="ew3-4x-249" id="GQq-1Q-fdN"/>
+                <outlet property="rankNumber" destination="3PQ-oG-FqM" id="NxW-3D-CpC"/>
+                <outlet property="ratingImage" destination="eRv-wa-EPc" id="pbE-Hu-KxH"/>
+                <outlet property="reviewButton" destination="M0c-gl-IKB" id="j2i-YR-Cc3"/>
+                <outlet property="view" destination="iN0-l3-epB" id="6Zv-k2-ro9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew3-4x-249">
+                    <rect key="frame" x="69" y="10" width="183" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eRv-wa-EPc">
+                    <rect key="frame" x="257" y="0.0" width="43" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="43" id="aGp-d7-W7T"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PQ-oG-FqM">
+                    <rect key="frame" x="20" y="13" width="31" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-gl-IKB">
+                    <rect key="frame" x="20" y="243" width="94" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="View Reviews">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="reviewButton:" destination="-1" eventType="touchUpInside" id="LXi-VE-Nf9"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cV1-pT-odE">
+                    <rect key="frame" x="20" y="44" width="280" height="191"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="191" id="pW5-h1-e1g"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCL-W4-34C">
+                    <rect key="frame" x="254" y="243" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="informationButton:" destination="-1" eventType="touchUpInside" id="thA-D2-Qyl"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="0VH-a9-n7d"/>
+                <constraint firstItem="eRv-wa-EPc" firstAttribute="leading" secondItem="ew3-4x-249" secondAttribute="trailing" constant="5" id="1ny-8I-jxm"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="trailing" secondItem="eRv-wa-EPc" secondAttribute="trailing" id="2qY-Nr-4Bb"/>
+                <constraint firstItem="M0c-gl-IKB" firstAttribute="top" secondItem="cV1-pT-odE" secondAttribute="bottom" constant="8" id="37b-m4-FhY"/>
+                <constraint firstAttribute="trailing" secondItem="cV1-pT-odE" secondAttribute="trailing" constant="20" symbolic="YES" id="Bwi-1M-yYK"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="leading" secondItem="M0c-gl-IKB" secondAttribute="leading" id="ENj-dN-tl7"/>
+                <constraint firstItem="ew3-4x-249" firstAttribute="leading" secondItem="3PQ-oG-FqM" secondAttribute="trailing" constant="18" id="Fvs-px-FO3"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="top" secondItem="eRv-wa-EPc" secondAttribute="bottom" constant="6" id="VY0-z4-nAk"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="a4a-Us-Pbu"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="leading" secondItem="3PQ-oG-FqM" secondAttribute="leading" id="cEe-oZ-XAu"/>
+                <constraint firstItem="eRv-wa-EPc" firstAttribute="leading" secondItem="ew3-4x-249" secondAttribute="trailing" constant="5" id="cyW-Ug-GXE"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="top" secondItem="3PQ-oG-FqM" secondAttribute="bottom" constant="15" id="diM-a9-eNR"/>
+                <constraint firstItem="cV1-pT-odE" firstAttribute="top" secondItem="eRv-wa-EPc" secondAttribute="bottom" constant="6" id="ioA-rW-fRk"/>
+                <constraint firstItem="3PQ-oG-FqM" firstAttribute="baseline" secondItem="ew3-4x-249" secondAttribute="baseline" constant="-1" id="p0P-0v-lvQ"/>
+                <constraint firstItem="eRv-wa-EPc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vdw-qM-DsR"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>
