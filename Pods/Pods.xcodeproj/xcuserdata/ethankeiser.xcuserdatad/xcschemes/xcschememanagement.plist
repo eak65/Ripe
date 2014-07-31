@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-NZCircularImageView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RATreeView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,7 +39,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-UIActivityIndicator-for-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,42 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FD97E7E796B4ED892D255A1</key>
+		<key>05822BDF6F6E468994C70474</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3F846767F1BB411B8BC31590</key>
+		<key>2228E383057C44E2A66D530F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>68BA456B5F1B47D590EC82D5</key>
+		<key>2887E66068AB4C728CD9D524</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6FC51FA99EA246048F139D67</key>
+		<key>2C370B30103C4297919E38AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94D7AC3730F946BFB7618B42</key>
+		<key>56EFD2D4169F470782B637F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9837EEF5F10F4BBAA3452072</key>
+		<key>836236B4C56C4CAAB9105BDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B55517C75C0D41ABACB787F1</key>
+		<key>871E6C6055F143D7A9D683EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BBE4B407AEBF4ADC9B08AFD9</key>
+		<key>AE1F568AF55A46E2BEE5267C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB0B8E6422B8440A9325E4C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C774AACF47EB4E549C1F1C89</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9C20C3802E5478E9C222B04</key>
 		<dict>
 			<key>primary</key>
 			<true/>

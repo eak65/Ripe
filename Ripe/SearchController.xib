@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pvm-8j-j7o">
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pvm-8j-j7o">
                     <rect key="frame" x="0.0" y="192" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
@@ -25,6 +25,11 @@
                 </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="0.23772624589999999" blue="0.36955511099999999" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="pvm-8j-j7o" secondAttribute="bottom" constant="268" id="HHb-wZ-kgS"/>
+                <constraint firstItem="pvm-8j-j7o" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c7g-Op-wur"/>
+                <constraint firstAttribute="trailing" secondItem="pvm-8j-j7o" secondAttribute="trailing" id="mz6-DV-vzQ"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

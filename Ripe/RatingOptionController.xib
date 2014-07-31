@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RatingOptionController">
+            <connections>
+                <outlet property="foodImage" destination="2Qq-XE-dJa" id="AUU-4M-WYR"/>
+                <outlet property="tableView" destination="RMb-lg-aLW" id="xXC-ZT-7ey"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="RMb-lg-aLW">
+                    <rect key="frame" x="0.0" y="226" width="320" height="342"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="342" id="esB-fo-yGD"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="MfQ-HL-PdE"/>
+                        <outlet property="delegate" destination="-1" id="zaY-bw-0uA"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select which face represents the quality" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whn-FF-Df9">
+                    <rect key="frame" x="20" y="197" width="305" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Qq-XE-dJa">
+                    <rect key="frame" x="40" y="79" width="240" height="103"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="103" id="tTi-vv-G7F"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Whn-FF-Df9" firstAttribute="top" secondItem="2Qq-XE-dJa" secondAttribute="bottom" constant="18" id="12w-NX-4zj"/>
+                <constraint firstItem="RMb-lg-aLW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ALW-dW-PBJ"/>
+                <constraint firstItem="2Qq-XE-dJa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="FL7-zT-3gU"/>
+                <constraint firstItem="Whn-FF-Df9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="UBX-SQ-tVE"/>
+                <constraint firstItem="RMb-lg-aLW" firstAttribute="centerX" secondItem="2Qq-XE-dJa" secondAttribute="centerX" id="bJU-Fg-r3M"/>
+                <constraint firstAttribute="bottom" secondItem="RMb-lg-aLW" secondAttribute="bottom" id="joq-Ng-Yuj"/>
+                <constraint firstItem="RMb-lg-aLW" firstAttribute="top" secondItem="Whn-FF-Df9" secondAttribute="bottom" constant="8" symbolic="YES" id="lyX-NW-Saw"/>
+                <constraint firstAttribute="trailing" secondItem="RMb-lg-aLW" secondAttribute="trailing" id="pAs-w3-zya"/>
+                <constraint firstAttribute="trailing" secondItem="Whn-FF-Df9" secondAttribute="trailing" constant="-5" id="qgk-AD-WGQ"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

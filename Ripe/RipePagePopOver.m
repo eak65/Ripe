@@ -10,6 +10,7 @@
 #import "InfoController.h"
 #import "RatingViewController.h"
 #import "SlidingMenuController.h"
+#import "RestaurantLandingController.h"
 @interface RipePagePopOver ()
 {
     NSString *menuLabel;
@@ -32,6 +33,16 @@
     }
     return self;
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+//self.appDelegate.food=nil;
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.delegate didChangeViews];
+
+}
+
 -(void)back:(id)sender
 {
     
@@ -41,6 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.delegate=self;
+    [self.view superview];
+    self.appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     scrollViews =[NSMutableArray array];
     self.transView =[NSMutableArray array];
     self.navigationController.navigationBar.translucent=NO;
@@ -71,26 +85,42 @@
         frame.origin.y=0;
         frame.size=self.scrollView.frame.size;
         SlidingMenuController * sliding=[[SlidingMenuController alloc]init];
-        sliding.navigationController=self.navigationController;
+        [sliding view];
         InfoController * info =[[InfoController alloc]initWithView:sliding.view];
-        sliding.detailed=info;
         [sliding.view setFrame:frame];
         [info.view setFrame:frame];
+        sliding.navigationController=self.navigationController;
+      //  [info.view setFrame:sliding.foodImage.frame];
+       
+     
+        sliding.detailed=info;
+        
+        NSLog(@"%f %f",sliding.view.frame.size.width,sliding.view.frame.size.height);
+        
+        NSLog(@"%f %f",info.view.frame.size.width,info.view.frame.size.height);
         [scrollViews addObject:sliding];
         sliding.foodNameLabel.text=[NSString stringWithFormat:@"%d",i];
-    
     
         //[subview addSubview:sliding.view];
        // [subview setBackgroundColor:[UIColor greenColor]];
         [self.scrollView addSubview:sliding.view];
+        [self.scrollView bringSubviewToFront:sliding.view];
+
     }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.items.count, 0);
-
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-
+    SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
+    self.appDelegate.food=sl.foodItem;
+}
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if(![viewController isEqual:self])
+    {
+        self.appDelegate.food=nil;
+    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -100,15 +130,20 @@
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page= floor((self.scrollView.contentOffset.x-pageWidth/2) / pageWidth)+1;
     self.pageControl.currentPage=page;
-}
--(void)getMeneItems
-{
+    
+    SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
+    
+    self.appDelegate.food=sl.foodItem;
+
+
     
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

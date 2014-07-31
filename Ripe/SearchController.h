@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "constants.h"
 @interface SearchController : UIViewController <UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) CLLocation *location;

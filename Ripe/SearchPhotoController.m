@@ -9,7 +9,9 @@
 #import "SearchPhotoController.h"
 #import "FoodSelectorController.h"
 @interface SearchPhotoController ()
-
+{
+    int type;
+}
 @end
 
 @implementation SearchPhotoController
@@ -26,10 +28,19 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+-(id)initWithType:(int) t
+{
+    type=t;
+    
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+  
+        self.descriptionLabel.text=@"Search a restaurant.";
+ 
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -44,7 +55,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController pushViewController:[[FoodSelectorController alloc]init] animated:YES];
+        [self.navigationController pushViewController:[[FoodSelectorController alloc]initWithType:type] animated:YES];
 }
 
 @end

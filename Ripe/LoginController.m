@@ -8,7 +8,6 @@
 #import "AFNetworking.h"
 #import "SearchController.h"
 #import "LoginController.h"
-#import "SignUpController.h"
 #import "DataManager.h"
 #import "constants.h"
 #import "DoAlertView.h"
@@ -81,6 +80,7 @@ DoAlertView * alertView;
 - (IBAction)signUp:(id)sender {
     
     SignUpController * signUp=[[SignUpController alloc]init];
+    signUp.delegate=self;
     
     [self.navigationController pushViewController:signUp animated:YES];
     
@@ -122,11 +122,11 @@ DoAlertView * alertView;
         [alert show];
         
     }];
-
     
-    
-    
-
+}
+-(void)SignUpDidCompleteSuccess
+{
+ 
     
 }
 @end

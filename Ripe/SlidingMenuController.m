@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 @interface SlidingMenuController ()
 {
+    BOOL a;
 }
 @end
 
@@ -46,13 +47,16 @@
     UITapGestureRecognizer * menuTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(menuImageTapped:)];
     self.foodImage.userInteractionEnabled = YES;
     [self.foodImage addGestureRecognizer:menuTap];
+  
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    a=NO;
+    self.foodItem=[[FoodItem alloc]init];
+    self.foodItem.foodName=@"Ethan";
     // Do any additional setup after loading the view.
 }
 
@@ -83,5 +87,29 @@
     UINavigationController * navRating =[[UINavigationController alloc] initWithRootViewController:rating];
     [self.navigationController presentViewController:navRating animated:YES completion:nil];
 
+}
+- (IBAction)infoButton:(id)sender {
+    
+    
+
+
+        if (a == NO) {
+            [UIView transitionFromView:self.view toView:self.detailed.view
+                              duration:1.0
+                               options:UIViewAnimationOptionTransitionFlipFromLeft
+                            completion:NULL];
+            a = YES; // a = !a;
+        }
+        else {
+            [UIView transitionFromView:self.detailed.view toView:self.foodImage
+                              duration:1.0
+                               options:UIViewAnimationOptionTransitionFlipFromLeft
+                            completion:NULL];
+            a = NO; // a = !a;
+        }
+
+    
+  // [UIView transitionFromView:self.foodImage toView:self.detailed.view duration:0.75 options:UIViewAnimationOptionTransitionFlipFromLeft completion:nil];
+    
 }
 @end

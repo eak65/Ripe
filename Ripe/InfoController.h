@@ -14,4 +14,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *price;
 -(id)initWithView:(UIView *)backView;
+-(void)setReverseView:(UIViewController*)vc;
 @end

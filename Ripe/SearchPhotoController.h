@@ -11,4 +11,6 @@
 #import "SearchController.h"
 @interface SearchPhotoController : SearchController
 
+-(id)initWithType:(int)t;
+
 @end

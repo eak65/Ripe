@@ -5,11 +5,14 @@
 //  Created by Ethan Keiser on 6/5/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
+#import "RatingViewController.h"
 
 #import "ProfileController.h"
 @interface ProfileController ()
 {
     DKScrollingTabController *leftTabController;
+    SBInstagramCollectionViewController *instagram ;
+    RatingViewController * ratingController;
 }
 @end
 
@@ -31,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.profileImage.image=[UIImage imageNamed:@"me.jpg"];
+    ratingController = [[RatingViewController alloc]init];
     self.navigationController.navigationBar.translucent=NO;
   self.usernameField.text=  [DataManager shared].userName;
     self.emailField.text=[DataManager shared].email;
@@ -61,11 +65,60 @@
     [leftTabController setButtonName:@"Reviews" atIndex:2];
     leftTabController.selectedTitle=@"Photos";
 
+    
+    
+    //here create the instagram view
+   instagram= [SBInstagramController instagramViewController];
+    
+    NSLog(@"framework version: %@",instagram.version);
+    
+    //both are optional, but if you need search by tag you need set both
+    instagram.isSearchByTag = YES; //if you want serach by tag
+    instagram.searchTag = @"colombia"; //search by tag query
+    
+    //    instagram.showOnePicturePerRow = YES; //to change way to show the feed, one picture per row(default = NO)
+    
+    instagram.showSwitchModeView = YES; //show a segment controller with view option
+    
+    [self.selectionView addSubview:instagram.view];
+
+    //    [instagram refreshCollection]; //refresh instagram feed
     // Do any additional setup after loading the view from its nib.
+}
+-(void)checkAndRemove:(UIView *)parentView andChildView:(UIView *) child
+{
+    NSArray *views=[parentView subviews];
+    BOOL found=NO;
+    for(UIView * v in views)
+    {
+        if([v  isKindOfClass:[child class]])
+        {
+            found=YES;
+        }
+    }
+    if(!found)
+    {
+        [parentView addSubview:child];
+    }
+
 }
 - (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
 {
-    
+    if(selection==0)
+    {
+        // remove the other two views
+        [ratingController.view removeFromSuperview];
+        [self checkAndRemove:self.selectionView andChildView:instagram.view];
+    }
+    else if(selection==1)
+    {
+        [instagram.view removeFromSuperview];
+        
+        [self checkAndRemove:self.selectionView andChildView:ratingController.view];
+    }
+    else{
+        
+    }
 }
 - (void)didReceiveMemoryWarning
 {

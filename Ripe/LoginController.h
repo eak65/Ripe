@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-@interface LoginController : UIViewController <CLLocationManagerDelegate,UITextFieldDelegate>
+#import "SignUpController.h"
+@interface LoginController : UIViewController <SignUpDelegate,CLLocationManagerDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *userNameField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;

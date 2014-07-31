@@ -199,6 +199,7 @@
 
 - (void)setButtonName:(NSString*)name atIndex:(NSUInteger)index {
     UIButton *button = self.buttons[index];
+   // [button setBackgroundImage:[UIImage imageNamed:@"me.jpg"] forState:UIControlStateNormal];
     [button setTitle:name forState:UIControlStateNormal];
     
     //TODO: update layout (in particular, button widths)

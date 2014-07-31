@@ -18,6 +18,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -59,7 +60,6 @@
     
     RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    
     if (cell == nil) {
         cell = [[RatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"RatingCell" owner:nil options:nil];
@@ -72,6 +72,11 @@
             }
         }
     }
+
+    cell.commentTextView.layer.cornerRadius=5.0;
+    cell.commentTextView.layer.borderColor=[[UIColor grayColor] CGColor];
+    cell.commentTextView.layer.borderWidth=2.0;
+    cell.commentTextView.userInteractionEnabled=NO;
     cell.ratingImage.userInteractionEnabled=NO;
     cell.userNameLabel.userInteractionEnabled=NO;
     cell.dateLabel.userInteractionEnabled=NO;
@@ -144,7 +149,7 @@
  
         return 160;
     
-        return 44;
+       
     
 }
 @end

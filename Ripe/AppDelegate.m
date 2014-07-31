@@ -9,9 +9,11 @@
 #import "RestaurantLandingController.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "FoodItem.h"
 #import "LoginController.h"
 #import "SearchPhotoController.h"
 #import "SearchController.h"
+#import "FoodSelectorController.h"
 #import "DataManager.h"
 @implementation AppDelegate
 
@@ -64,20 +66,29 @@
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex
 {
-    if([item.title isEqualToString:@"Photo"])
+    
+    if([item.title isEqualToString:@"Photo"]||[item.title isEqualToString:@"Rank"])
     {
-        for(UIViewController *vi in self.mainNav.viewControllers)
-        NSLog(@"%@",vi);
+        int type;
+        if([item.title isEqualToString:@"Photo"]){
+            type =1;}
+        else{
+                type=2;
+        }
+        
         if(self.mainNav.viewControllers.count>2)
         {
             if([self.mainNav.viewControllers[1] isKindOfClass:[RestaurantLandingController class]])
             {
+                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[FoodSelectorController alloc]initWithType:type andFoodItem:self.food]];
                 NSLog(@"Resturant photos");
+                [self.mainNav presentViewController:nav animated:YES completion:nil];
+
             }
             else if([self.mainNav.viewControllers[0] isKindOfClass:[SearchController class]])
             {
-                NSLog(@"Search photos");
-                [self.mainNav presentViewController:[[SearchPhotoController alloc]init] animated:YES completion:nil];
+                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[SearchPhotoController alloc]initWithType:type]];
+                [self.mainNav presentViewController:nav animated:YES completion:nil];
 
             }
         }
@@ -86,17 +97,14 @@
             if([self.mainNav.viewControllers[0] isKindOfClass:[SearchController class]])
             {
                 
-                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[SearchPhotoController alloc]init]];
+                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[SearchPhotoController alloc]initWithType:type]];
                 [self.mainNav presentViewController:nav animated:YES completion:nil];
 
             }
 
         }
     }
-    else if([item.title isEqualToString:@"Rank"])
-    {
-        
-    }
+    
     else if([item.title isEqualToString:@"Profile"])
     {
         if(![DataManager shared].userName)

@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_IDMPhotoBrowser 3
 #define COCOAPODS_VERSION_PATCH_IDMPhotoBrowser 5
 
+// NZCircularImageView
+#define COCOAPODS_POD_AVAILABLE_NZCircularImageView
+#define COCOAPODS_VERSION_MAJOR_NZCircularImageView 0
+#define COCOAPODS_VERSION_MINOR_NZCircularImageView 0
+#define COCOAPODS_VERSION_PATCH_NZCircularImageView 4
+
 // RATreeView
 #define COCOAPODS_POD_AVAILABLE_RATreeView
 #define COCOAPODS_VERSION_MAJOR_RATreeView 0
@@ -78,9 +84,27 @@
 #define COCOAPODS_VERSION_MINOR_RNGridMenu 1
 #define COCOAPODS_VERSION_PATCH_RNGridMenu 3
 
+// SDWebImage
+#define COCOAPODS_POD_AVAILABLE_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_SDWebImage 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage 0
+
+// SDWebImage/Core
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
+
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
+
+// UIActivityIndicator-for-SDWebImage
+#define COCOAPODS_POD_AVAILABLE_UIActivityIndicator_for_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_UIActivityIndicator_for_SDWebImage 1
+#define COCOAPODS_VERSION_MINOR_UIActivityIndicator_for_SDWebImage 0
+#define COCOAPODS_VERSION_PATCH_UIActivityIndicator_for_SDWebImage 5
 

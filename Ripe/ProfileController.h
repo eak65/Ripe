@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
 #import "DKScrollingTabController.h"
+#import "SBInstagramCollectionViewController.h"
+#import "SBInstagramController.h"
+
 
 @interface ProfileController : UIViewController <DKScrollingTabControllerDelegate>
+@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
+@property (strong, nonatomic) IBOutlet UIView *selectionView;
 
 @property (strong, nonatomic) IBOutlet UIView *tabScrollerBar;
 @property (strong, nonatomic) IBOutlet UITextField *quoteField;

@@ -139,6 +139,11 @@ typedef void (^RNBlurCompletion)(void);
     return view;
 }
 
+-(void)setContentViewCenter:(CGPoint )centerPoint
+{
+    _contentView.center =centerPoint;
+
+}
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

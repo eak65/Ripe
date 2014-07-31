@@ -10,13 +10,16 @@
 #import "constants.h"
 #import "SearchResult.h"
 #import "DKScrollingTabController.h"
-
-@interface RestaurantLandingController : UIViewController <UIScrollViewDelegate,DKScrollingTabControllerDelegate>
+#import "RipePagePopOver.h"
+#import "FoodItem.h"
+@interface RestaurantLandingController : UIViewController <RipePageDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,DKScrollingTabControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) IBOutlet UIView *tabScrollerView;
 @property (strong, nonatomic) IBOutlet UIImageView *smileyRating;
+@property (strong, nonatomic) IBOutlet UIScrollView *foodScroller;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *restaurantImageView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -27,5 +30,6 @@
 @property(nonatomic ,strong)SearchResult * searchResult;
 @property (strong, nonatomic) IBOutlet UIView *menuView;
 - (IBAction)open:(id)sender;
+@property(strong,nonatomic)UITableView * tableview;
 
 @end

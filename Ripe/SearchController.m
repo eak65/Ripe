@@ -7,6 +7,7 @@
 //
 #import "SearchResult.h"
 #import "AFnetworking.h"
+
 #import "SearchController.h"
 #import "DoAlertView.h"
 #import "RestaurantLandingController.h"
@@ -77,7 +78,8 @@
     self.searchBar.placeholder=@"Parc or Parc in Philadelphia";
     self.title=@"Search";
     self.navigationController.navigationBar.translucent=NO;
-
+    UITapGestureRecognizer * gestureRecognizer =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backTouch)];
+   // [self.view addGestureRecognizer:gestureRecognizer];
     [self getLocation];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -90,6 +92,11 @@
     self.modal = [[RNBlurModalView alloc] initWithParentView:self.view view:popup];
 
     
+}
+
+-(void)backTouch{
+    
+    //[self.searchBar resignFirstResponder];
 }
 - (CLLocationManager *)locationManager {
     if (_locationManager != nil) {
@@ -135,7 +142,7 @@
 
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        
+        NSLog(@"%@",operation.request.URL);
         
         NSDictionary *r = responseObject;
         NSArray *results =[r objectForKey:@"results"];

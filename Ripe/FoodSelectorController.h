@@ -12,6 +12,9 @@
 #import "FoodItem.h"
 @interface FoodSelectorController : UIViewController <RATreeViewDataSource,RATreeViewDelegate>
 @property (strong, nonatomic) IBOutlet RATreeView *treeView;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property(strong,nonatomic)NSMutableArray *menus;
+-(id)initWithType:(int) t andFoodItem:(FoodItem *)food;
+-(id)initWithType:(int) t;
 
 @end
