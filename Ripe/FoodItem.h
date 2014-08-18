@@ -10,8 +10,13 @@
 
 @interface FoodItem : NSObject
 
-@property(strong,nonatomic)NSString * foodName;
-@property(strong,nonatomic)NSString * foodId;
+@property(strong,nonatomic)NSString * Name;
+@property(strong,nonatomic)NSString * Description;
+@property(strong,nonatomic)NSString * Price;
+@property(strong,nonatomic)NSString * Id;
+@property(strong,nonatomic)NSString * MenuSectionId;
+@property(strong,nonatomic)NSString * Type;
+
 
 
 @end

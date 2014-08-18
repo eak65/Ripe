@@ -11,7 +11,8 @@
 @interface DataManager : NSObject
 +(DataManager *)shared;
 @property(nonatomic, strong)NSString *userId;
-@property(nonatomic, strong)NSString *userName;
+@property(nonatomic, strong)NSString *firstName;
+@property(nonatomic, strong)NSString *lastName;
 @property(nonatomic, strong)NSString *email;
 @property(nonatomic, strong)NSString *password;
 

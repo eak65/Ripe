@@ -7,7 +7,7 @@
 //
 #import "SearchResult.h"
 #import "AFnetworking.h"
-
+#import "NSObject+ObjectMap.h"
 #import "SearchController.h"
 #import "DoAlertView.h"
 #import "RestaurantLandingController.h"
@@ -151,11 +151,17 @@
         for(NSDictionary *dict in results)
         {
             NSLog(@"%@",dict);
+            NSError *error;
+            NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:dict
+                                                                   options:NSJSONReadingAllowFragments
+                                                                     error:&error];
+
+            
             double latitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
             double longitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
-            searchResult=[[SearchResult alloc]init];
+            searchResult=[[SearchResult alloc]initWithJSONData:dataFromDict];
+
             searchResult.location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
-            
             searchResult.address=[dict objectForKey:@"formatted_address"];
             searchResult.name=[dict objectForKey:@"name"];
             NSArray * array=[NSArray arrayWithArray:[dict objectForKey:@"photos"]];

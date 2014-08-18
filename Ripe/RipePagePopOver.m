@@ -10,19 +10,21 @@
 #import "InfoController.h"
 #import "RatingViewController.h"
 #import "SlidingMenuController.h"
+#import "Menu.h"
 #import "RestaurantLandingController.h"
 @interface RipePagePopOver ()
 {
     NSString *menuLabel;
+    Menu *menu;
     NSMutableArray *scrollViews;
 }
 @end
 
 @implementation RipePagePopOver
 
--(id)initWithMenu:(NSString *)menu
+-(id)initWithMenu:(Menu *)m
 {
-    menuLabel=menu;
+    menu=m;
     return self;
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -58,19 +60,13 @@
     scrollViews =[NSMutableArray array];
     self.transView =[NSMutableArray array];
     self.navigationController.navigationBar.translucent=NO;
-    self.tabBarController.tabBar.translucent=NO;
     UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(back:)];
     self.pageControl.userInteractionEnabled=NO;
     self.navigationItem.leftBarButtonItem=left;
-    self.MenuLabel.text=menuLabel;
-    self.items =[NSMutableArray array];
-    [self.items addObject:@""];
-    [self.items addObject:@""];
-    [self.items addObject:@""];
-    [self.items addObject:@""];
-    [self.items addObject:@""];
-    [self.items addObject:@""];
+    self.items =menu.foodItems;
+  
     self.scrollView.clipsToBounds=YES;
+    if(self.items.count>0){
     self.pageControl.numberOfPages=self.items.count;
     self.pageControl.pageIndicatorTintColor=[UIColor redColor];
     self.pageControl.currentPageIndicatorTintColor=[UIColor greenColor];
@@ -86,7 +82,8 @@
         frame.size=self.scrollView.frame.size;
         SlidingMenuController * sliding=[[SlidingMenuController alloc]init];
         [sliding view];
-        InfoController * info =[[InfoController alloc]initWithView:sliding.view];
+        InfoController * info =[[InfoController alloc]initWithView:sliding.view andFoodItem:[self.items objectAtIndex:i]];
+        
         [sliding.view setFrame:frame];
         [info.view setFrame:frame];
         sliding.navigationController=self.navigationController;
@@ -100,20 +97,25 @@
         NSLog(@"%f %f",info.view.frame.size.width,info.view.frame.size.height);
         [scrollViews addObject:sliding];
         sliding.foodNameLabel.text=[NSString stringWithFormat:@"%d",i];
-    
+        sliding.foodItem=[self.items objectAtIndex:i];
+
         //[subview addSubview:sliding.view];
        // [subview setBackgroundColor:[UIColor greenColor]];
         [self.scrollView addSubview:sliding.view];
         [self.scrollView bringSubviewToFront:sliding.view];
 
-    }
+    }}
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.items.count, 0);
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    if(self.items.count>0){
     SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
     self.appDelegate.food=sl.foodItem;
+        
+    }
 }
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -125,16 +127,21 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    self.smileyImage.image=[UIImage imageNamed:@"smle.jpeg"];
 
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page= floor((self.scrollView.contentOffset.x-pageWidth/2) / pageWidth)+1;
+    int current = (int)self.pageControl.currentPage;
     self.pageControl.currentPage=page;
-    
     SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
+
+    if(current !=page)
+    {
+            [sl.detailed reverse];
+
+    }
     
     self.appDelegate.food=sl.foodItem;
-
+    
 
     
 }

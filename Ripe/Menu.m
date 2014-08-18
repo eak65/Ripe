@@ -11,7 +11,10 @@
 @implementation Menu
 -(id)init
 {
-    self.foodItems=[NSMutableArray array];
+    self= [super init];
+    
+    [self setValue:@"FoodItem" forKeyPath:@"propertyArrayMap.foodItems"];
+
     return self;
 }
 @end

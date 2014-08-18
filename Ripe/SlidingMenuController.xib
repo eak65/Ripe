@@ -52,7 +52,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCL-W4-34C">
-                            <rect key="frame" x="278" y="214" width="22" height="22"/>
+                            <rect key="frame" x="278" y="184" width="22" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,7 +69,7 @@
                     <constraints>
                         <constraint firstItem="cV1-pT-odE" firstAttribute="trailing" secondItem="yCL-W4-34C" secondAttribute="trailing" constant="20" id="3dg-EL-suh"/>
                         <constraint firstAttribute="trailing" secondItem="cV1-pT-odE" secondAttribute="trailing" id="OyA-K1-F4i"/>
-                        <constraint firstItem="yCL-W4-34C" firstAttribute="top" secondItem="cV1-pT-odE" secondAttribute="bottom" constant="8" symbolic="YES" id="ayr-De-AsM"/>
+                        <constraint firstItem="yCL-W4-34C" firstAttribute="top" secondItem="cV1-pT-odE" secondAttribute="bottom" constant="-22" id="ayr-De-AsM"/>
                         <constraint firstItem="cV1-pT-odE" firstAttribute="leading" secondItem="5Nl-xm-Oe9" secondAttribute="leading" id="eKq-BR-2R3"/>
                         <constraint firstItem="cV1-pT-odE" firstAttribute="top" secondItem="5Nl-xm-Oe9" secondAttribute="top" constant="-5" id="zRa-Ke-gp7"/>
                     </constraints>

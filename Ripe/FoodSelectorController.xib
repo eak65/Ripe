@@ -16,20 +16,32 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCL-8B-cot" customClass="RATreeView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCL-8B-cot" customClass="RATreeView">
                     <rect key="frame" x="0.0" y="95" width="320" height="473"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select option to food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-9D-cHn">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select option to food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-9D-cHn">
                     <rect key="frame" x="0.0" y="31" width="320" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="mXA-Rq-Ojh"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="RCL-8B-cot" secondAttribute="trailing" id="6PV-2c-MKg"/>
+                <constraint firstItem="iS9-9D-cHn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="31" id="ASE-Z6-kOE"/>
+                <constraint firstAttribute="bottom" secondItem="RCL-8B-cot" secondAttribute="bottom" id="I5i-ij-ZAd"/>
+                <constraint firstItem="RCL-8B-cot" firstAttribute="top" secondItem="iS9-9D-cHn" secondAttribute="bottom" constant="43" id="Sx3-Ro-uNa"/>
+                <constraint firstItem="RCL-8B-cot" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="U8z-Kc-ZfP"/>
+                <constraint firstItem="iS9-9D-cHn" firstAttribute="leading" secondItem="RCL-8B-cot" secondAttribute="leading" id="Wha-9M-p7e"/>
+                <constraint firstItem="iS9-9D-cHn" firstAttribute="trailing" secondItem="RCL-8B-cot" secondAttribute="trailing" id="qgi-Ci-uYV"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

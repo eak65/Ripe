@@ -10,9 +10,18 @@
 #import "RNGridMenu.h"
 #import "BaseViewController.h"
 #import "FoodItem.h"
-
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate,BaseViewDelegate , RNGridMenuDelegate>{
+#import "Restaurant.h"
+#import "SearchResult.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIEcommerceProduct.h"
+#import "GAIEcommerceProductAction.h"
+#import "GAIEcommercePromotion.h"
+#import "GAIFields.h"
+#import "GAILogger.h"
+#import "GAITrackedViewController.h"
+#import "GAITracker.h"
+@interface AppDelegate : UIResponder <UITabBarDelegate,UIApplicationDelegate,BaseViewDelegate , RNGridMenuDelegate>{
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -23,6 +32,8 @@
 @property ( strong, nonatomic) RNGridMenu * av;
 @property ( strong, nonatomic) UINavigationController * mainNav;
 @property(strong,nonatomic)FoodItem * food;
+@property(strong,nonatomic)Restaurant * restaurant;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

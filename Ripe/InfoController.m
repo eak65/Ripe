@@ -7,17 +7,18 @@
 //
 
 #import "InfoController.h"
-
 @interface InfoController ()
 {
     UIView *presentView;
+    FoodItem * foodItem;
 }
 @end
 
 @implementation InfoController
 
--(id)initWithView:(UIView *)backView
+-(id)initWithView:(UIView *)backView andFoodItem:(FoodItem *)food
 {
+    foodItem=food;
     presentView = backView;
     return  self;
 }
@@ -33,6 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.price.text=foodItem.Price;
+    self.description.text=foodItem.Description;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -45,9 +48,16 @@
 - (IBAction)infoBackButton:(id)sender {
     
  
-   [UIView transitionFromView:self.view toView:presentView duration:0.75 options:UIViewAnimationOptionTransitionFlipFromRight completion:nil];
+    [self reverse];
     
     
     
 }
+-(void)reverse
+{
+    [UIView transitionFromView:self.view toView:presentView duration:.4 options:UIViewAnimationOptionTransitionFlipFromRight completion:nil];
+    
+
+}
+
 @end

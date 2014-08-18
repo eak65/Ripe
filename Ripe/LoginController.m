@@ -11,6 +11,9 @@
 #import "DataManager.h"
 #import "constants.h"
 #import "DoAlertView.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAIDictionaryBuilder.h"
 @interface LoginController ()
 
 @end
@@ -37,12 +40,28 @@ DoAlertView * alertView;
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent=NO;
     self.passwordField.delegate=self;
+    self.passwordField.secureTextEntry=YES;
     self.userNameField.delegate=self;
     self.title=@"RIPE";
     [self getLocation];
     // Do any additional setup after loading the view from its nib.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [tracker set:kGAIScreenName
+           value:@"Login Screen"];
+    
+    // Previous V3 SDK versions
+    // [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
+    // New SDK versions
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
 -(CLLocation *)getLocation
 {
     [[self locationManager] startUpdatingLocation];
@@ -90,7 +109,7 @@ DoAlertView * alertView;
 
 - (IBAction)loginButton:(id)sender {
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameField.text,@"Username",self.passwordField.text,@"Password",self.userNameField.text,@"Email", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordField.text,@"password",self.userNameField.text,@"email", nil];
     [self.userNameField resignFirstResponder];
     [self.passwordField resignFirstResponder];
     NSURL *url = [NSURL URLWithString:KBaseUrl];
@@ -108,7 +127,9 @@ DoAlertView * alertView;
         self.loginButton.userInteractionEnabled=YES;
         NSLog(@"%@",responseObject);
         [DataManager shared].userId=[responseObject objectForKey:@"UserId"];
-        [DataManager shared].userName=[responseObject objectForKey:@"UserName"];
+        [DataManager shared].firstName=[responseObject objectForKey:@"FirstName"];
+        [DataManager shared].lastName=[responseObject objectForKey:@"LastName"];
+
         [DataManager shared].email=[responseObject objectForKey:@"Email"];
         [DataManager shared].password = [responseObject objectForKey:@"Password"];
         
@@ -126,7 +147,10 @@ DoAlertView * alertView;
 }
 -(void)SignUpDidCompleteSuccess
 {
- 
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+//    UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"Email Sent!" message:@"Please confirm your  email" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
     
+ //   [alert show];
 }
 @end

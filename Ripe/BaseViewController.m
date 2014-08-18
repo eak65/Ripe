@@ -60,6 +60,14 @@
   [self.view addSubview:button];
 }
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
+    self.tabBar.translucent=YES;
+    [self.tabBar  setAlpha:0];//Setting Alpha of TabView.
+
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;

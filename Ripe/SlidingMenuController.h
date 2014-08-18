@@ -11,7 +11,7 @@
 #import "IDMPhotoBrowser.h"
 #import "FoodItem.h"
 @interface SlidingMenuController : UIViewController
-@property (strong,nonatomic) FoodItem * foodItem;
+@property (retain,nonatomic) FoodItem * foodItem;
 @property (strong, nonatomic) IBOutlet UILabel *rankNumber;
 @property (strong, nonatomic) IBOutlet UIImageView *ratingImage;
 @property (strong, nonatomic) IBOutlet UILabel *foodNameLabel;

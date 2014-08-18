@@ -373,11 +373,11 @@ SignUpCell *emailCell=(SignUpCell *)[self.tableView cellForRowAtIndexPath:[NSInd
 
         passwordV.errorLabel.text=@"Passwords do not match.";
     }
-    if(emailText.length==0|| ![emailText substringFromIndex:[emailText rangeOfString:@"@"].location].length>0)
+   /* if(emailText.length==0||[emailText rangeOfString:@"@"].location >0|| ![emailText substringFromIndex:[emailText rangeOfString:@"@"].location].length>0)
     {        validated=NO;
 
         emailCell.errorLabel.text=@"Invalid email. Requires @ sign";
-    }
+    }*/
     if(validated){
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:firstName,@"firstName",passwordText,@"password",emailText,@"email",lastName,@"lastName",sex,@"sex",[NSString stringWithFormat:@"POINT(%f %f)",x,y ],@"location", nil];
@@ -398,13 +398,12 @@ SignUpCell *emailCell=(SignUpCell *)[self.tableView cellForRowAtIndexPath:[NSInd
     }];
     [manager POST:@"/api/Login/PostSignUp" parameters:dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [load hideAlert];
-        [self.delegate SignUpDidCompleteSuccess];
      
-        [self.navigationController dismissViewControllerAnimated:YES completion:
-         ^{
-             UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"Email Sent!" message:@"Please confirm your university email" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-             [alert show];
-         }];
+        [self.delegate SignUpDidCompleteSuccess];
+
+      
+        
+       
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -412,10 +411,12 @@ SignUpCell *emailCell=(SignUpCell *)[self.tableView cellForRowAtIndexPath:[NSInd
         DoAlertView * alert =[[DoAlertView alloc]init];
         
         alert.bDestructive=YES;
-        [alert doYes:@"Error: Could not Register" yes:^(DoAlertView *alertView) {
+        if(  operation.response.statusCode ==409){
+        [alert doYes:@"Email has already been taken" yes:^(DoAlertView *alertView) {
             
         }];
-    }];
+        }
+        }];
     
 }
 

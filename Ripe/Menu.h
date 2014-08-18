@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Menu : NSObject
-@property(strong,nonatomic)NSString * menuName;
-@property(strong,nonatomic)NSString * menuId;
+@property(nonatomic,strong)NSString * name;
+@property(nonatomic,strong)NSMutableArray * foodItems;
 
-@property(strong,nonatomic)NSMutableArray *foodItems;
 @end

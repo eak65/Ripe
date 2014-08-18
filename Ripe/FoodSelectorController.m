@@ -7,12 +7,19 @@
 //
 #import "PhotoController.h"
 #import "FoodSelectorController.h"
+#import "Restaurant.h"
 #import "RatingOptionController.h"
+#import <AFNetworking.h>
+#import "SearchResult.h"
+#import "SearchResult.h"
 #import "constants.h"
+#import "NSObject+ObjectMap.h"
+#import "DoAlertView.h"
 @interface FoodSelectorController ()
 {
     int type;
     FoodItem * foodOption;
+    SearchResult * searchResult;
 }
 @end
 
@@ -26,14 +33,15 @@
     }
     return self;
 }
--(id)initWithType:(int) t
+-(id)initWithType:(int) t andSearchResult:(SearchResult *)result
 {
     self.menus=[NSMutableArray array];
-
+    searchResult=result;
       type=t;
+    [self getLandingPage];
     return self;
 }
--(id)initWithType:(int) t andFoodItem:(FoodItem *)food
+-(id)initWithType:(int) t andFoodItem:(FoodItem *)food andRestaurant:(Restaurant *)rest
 {
     self.menus=[NSMutableArray array];
 
@@ -41,11 +49,21 @@
     {
         foodOption=food;
         Menu * n =[[Menu alloc]init];
-        n.menuName=@"Did you want this?";
-    
+        n.name=@"Did you want this?";
+        n.foodItems=[NSMutableArray array];
         [n.foodItems addObject:food];
         [self.menus addObject:n];
-        
+       
+    }
+    if(rest)
+    {
+        [self.menus addObject:rest.Appetizer];
+        [self.menus addObject:rest.Drink];
+        [self.menus addObject:rest.SoupSalad];
+        [self.menus addObject:rest.Dessert];
+        [self.menus addObject:rest.Entree];
+        [self.menus addObject:rest.Other];
+
     }
     type=t;
     
@@ -58,7 +76,8 @@
         if([item isKindOfClass:[Menu class]])
         {
             Menu *m=item;
-            if( [[m.foodItems objectAtIndex:0] isEqual:foodOption])
+            
+            if(m.foodItems.count>0&& [[m.foodItems objectAtIndex:0] isEqual:foodOption])
             {
                 return YES;
             }
@@ -76,7 +95,6 @@
    // self.menus=[NSMutableArray array];
     self.treeView.delegate=self;
     self.treeView.dataSource=self;
-    [self loadMenu];
       self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
 
     if(type==1)
@@ -88,6 +106,7 @@
          self.descriptionLabel.text=@"Select the food item you would like to rate.";
 
     }
+    [self.treeView reloadData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -96,10 +115,10 @@
     
     // load the menu
     Menu * n =[[Menu alloc]init];
-    n.menuName=@"Entree";
+  //  n.menuName=@"Entree";
     
     FoodItem *food =[[FoodItem alloc] init];
-    food.foodName=@"pizza";
+    //food.Name=@"pizza";
     [n.foodItems addObject:food];
     
     [self.menus addObject:n];
@@ -179,11 +198,11 @@
     if([item isKindOfClass:[Menu class]])
     {
         Menu * menu=item;
-        cell.textLabel.text=menu.menuName;
+        cell.textLabel.text=menu.name;
     }
     else{
         FoodItem *foodItem=item;
-        cell.textLabel.text=foodItem.foodName;
+        cell.textLabel.text=foodItem.Name;
     }
     return cell;
     
@@ -199,6 +218,47 @@
     {
        return [menu.foodItems objectAtIndex:index];
     }
+    
+}
+
+-(void)getLandingPage
+{
+    DoAlertView * alert=[[DoAlertView alloc]init];
+    alert.nAnimationType=3;
+    [alert doAlert:@"Searching" body:@"Searching..." duration:0.0 done:^(DoAlertView *alertView) {
+        
+    }];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]initWithBaseURL:[NSURL URLWithString:KBaseUrl]];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:searchResult.id,@"googleId",searchResult.name,@"name",[NSString stringWithFormat:@"%f",searchResult.location.coordinate.latitude ],@"lat",[NSString stringWithFormat:@"%f",searchResult.location.coordinate.longitude],@"lon", nil];
+    [manager GET:@"/api/Restaurant/GetRestaurantFromGoogle" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [alert hideAlert];
+        if(operation.response.statusCode==204)
+        {
+            DoAlertView *valert=[[DoAlertView alloc]init];
+            [valert doYes:@"Not Registered" body:@"Sorry this restaurant is not registerd with our service" yes:^(DoAlertView *alertView) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+        else{
+            NSError *error;
+            NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:responseObject
+                                                                   options:NSJSONReadingAllowFragments
+                                                                     error:&error];
+            
+          Restaurant *  rest=[[Restaurant alloc] initWithJSONData:dataFromDict];
+            [self.menus addObject:rest.Appetizer];
+            [self.menus addObject:rest.Drink];
+            [self.menus addObject:rest.SoupSalad];
+            [self.menus addObject:rest.Dessert];
+            [self.menus addObject:rest.Entree];
+            [self.menus addObject:rest.Other];
+
+            [self.treeView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [alert hideAlert];
+    }];
     
 }
 @end

@@ -56,7 +56,7 @@
     [super viewDidLoad];
     a=NO;
     self.foodItem=[[FoodItem alloc]init];
-    self.foodItem.foodName=@"Ethan";
+    self.foodItem.Name=@"Ethan";
     // Do any additional setup after loading the view.
 }
 
@@ -95,7 +95,7 @@
 
         if (a == NO) {
             [UIView transitionFromView:self.view toView:self.detailed.view
-                              duration:1.0
+                              duration:.4
                                options:UIViewAnimationOptionTransitionFlipFromLeft
                             completion:NULL];
             a = YES; // a = !a;

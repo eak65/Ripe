@@ -37,7 +37,7 @@
     self.profileImage.image=[UIImage imageNamed:@"me.jpg"];
     ratingController = [[RatingViewController alloc]init];
     self.navigationController.navigationBar.translucent=NO;
-  self.usernameField.text=  [DataManager shared].userName;
+  self.usernameField.text=  [DataManager shared].firstName;
     self.emailField.text=[DataManager shared].email;
     
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back)];

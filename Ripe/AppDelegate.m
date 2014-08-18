@@ -24,14 +24,37 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval =10;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    
+    
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-53872836-1"];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    
+    
+    
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     LoginController * login=[[LoginController alloc]init];
     UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];
     BaseViewController *tabBar = [[BaseViewController alloc]init];
     tabBar.actionDelegate=self;
-      [tabBar addCenterButtonWithImage:[UIImage imageNamed:@"camera_button_take.png"] highlightImage:[UIImage imageNamed:@"tabBar_cameraButton_ready_matte.png"]];
 
+    tabBar.delegate=self;
+      [tabBar addCenterButtonWithImage:[UIImage imageNamed:@"camera_button_take.png"] highlightImage:[UIImage imageNamed:@"tabBar_cameraButton_ready_matte.png"]];
+    
   self.mainNav=[[UINavigationController alloc]initWithRootViewController:[[SearchController alloc]init]];
     NSArray *tabs=[NSArray arrayWithObject:self.mainNav];
     [tabBar setViewControllers:tabs];
@@ -42,6 +65,16 @@
     
  
     return YES;
+}
+-(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    
+    
+    return viewController != tabBarController.selectedViewController;
 }
 -(void)didSelectCenterButton
 {
@@ -80,7 +113,7 @@
         {
             if([self.mainNav.viewControllers[1] isKindOfClass:[RestaurantLandingController class]])
             {
-                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[FoodSelectorController alloc]initWithType:type andFoodItem:self.food]];
+                UINavigationController * nav= [[UINavigationController alloc] initWithRootViewController:[[FoodSelectorController alloc]initWithType:type andFoodItem:self.food andRestaurant:self.restaurant]];
                 NSLog(@"Resturant photos");
                 [self.mainNav presentViewController:nav animated:YES completion:nil];
 
@@ -107,7 +140,7 @@
     
     else if([item.title isEqualToString:@"Profile"])
     {
-        if(![DataManager shared].userName)
+        if(![DataManager shared].firstName)
         {
         LoginController * login=[[LoginController alloc]init];
         UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];

@@ -11,10 +11,15 @@
 #import "UIImageView+AFNetworking.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ExtraInfoController.h"
+#import <AFNetworking.h>
 #import "RatingCell.h"
+#import "constants.h"
+#import "NSObject+ObjectMap.h"
 #import "SearchController.h"
+#import "DoAlertView.h"
 #import "AFNetworking.h"
 #import "InfoController.h"
+#import "Restaurant.h"
 #import "SlidingMenuController.h"
 #import "RipePagePopOver.h"
 @interface RestaurantLandingController ()
@@ -24,6 +29,8 @@
     InfoController *info;
     SlidingMenuController *slider;
     RipePagePopOver * ripePage;
+    Restaurant * restaurant;
+    NSMutableArray * ripePages;
     UIImageView *logoView ;
 }
 @end
@@ -55,13 +62,61 @@
     {
         AppDelegate * delegate=(AppDelegate *)[[UIApplication sharedApplication]delegate];
         delegate.food=nil;
+        delegate.restaurant=nil;
     }
     }
 
+-(void)getLandingPage
+{
+    DoAlertView * alert=[[DoAlertView alloc]init];
+    alert.nAnimationType=3;
+    [alert doAlert:@"Searching" body:@"Searching..." duration:0.0 done:^(DoAlertView *alertView) {
+        
+    }];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]initWithBaseURL:[NSURL URLWithString:KBaseUrl]];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.searchResult.id,@"googleId",self.searchResult.name,@"name",[NSString stringWithFormat:@"%f",self.searchResult.location.coordinate.latitude ],@"lat",[NSString stringWithFormat:@"%f",self.searchResult.location.coordinate.longitude],@"lon", nil];
+    [manager GET:@"/api/Restaurant/GetRestaurantFromGoogle" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [alert hideAlert];
+        if(operation.response.statusCode==204)
+        {
+            DoAlertView *valert=[[DoAlertView alloc]init];
+            [valert doYes:@"Not Registered" body:@"Sorry this restaurant is not registerd with our service" yes:^(DoAlertView *alertView) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+        else{
+        NSError *error;
+        NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:responseObject
+                                                               options:NSJSONReadingAllowFragments
+                                                                 error:&error];
+
+         restaurant=[[Restaurant alloc] initWithJSONData:dataFromDict];
+            
+        [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Appetizer]];
+            [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Entree]];
+            [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Dessert]];
+            [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Drink]];
+            [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.SoupSalad]];
+            AppDelegate * delegate=(AppDelegate *)[[UIApplication sharedApplication]delegate];
+            delegate.restaurant= restaurant;
+    
+            [leftTabController selectButtonWithIndex:1 delegate:YES];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [alert hideAlert];
+    }];
+        
+}
+-(void)setupPage:(Restaurant *)rest
+{
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self getLandingPage];
+    ripePages=[NSMutableArray array];
    int yoffset= self.navigationController.navigationBar.frame.size.height;
     [self.scrollView setFrame:CGRectMake(0, yoffset*2+20, 320, self.scrollView.frame.size.height)];
     self.navigationController.delegate=self;
@@ -72,18 +127,20 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    
     UITapGestureRecognizer * touchMenu=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(restaurantPhotoTouched)];
     int width=(self.view.frame.size.width/2)+20;
-    UITapGestureRecognizer * infoTouched=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(infoTouched)];
-    logoView = [[UIImageView alloc] initWithFrame:CGRectMake(width,10,25,25)];
-    [logoView addGestureRecognizer:infoTouched];
-    logoView.image=[UIImage imageNamed:@"drinks.jpeg"] ;
-    [logoView setUserInteractionEnabled:YES];
+   
+   // logoView = [[UIImageView alloc] initWithFrame:CGRectMake(width,10,25,25)];
+    
+    
+    //logoView.image=[UIImage imageNamed:@"drinks.jpeg"] ;
+    //[logoView setUserInteractionEnabled:YES];
 
-    [logoView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.navigationController.navigationBar addSubview:logoView];
-    
-    
+    //[logoView setContentMode:UIViewContentModeScaleAspectFit];
+  //  [self.navigationController.navigationBar addSubview:logoView];
+    self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(infoTouched)];
+    self.title=self.searchResult.name;
     self.restaurantImage.userInteractionEnabled=NO;
     
     [self.activityIndicator startAnimating];
@@ -119,13 +176,14 @@
     leftTabController.unselectedTextColor = [UIColor grayColor];
     leftTabController.unselectedBackgroundColor = [UIColor clearColor];
     
-    leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0"];
+    leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0",@"PLACEEEE\n0"];
     [leftTabController setButtonName:@"Appetizer" atIndex:0];
     [leftTabController setButtonName:@"Entree" atIndex:1];
     [leftTabController setButtonName:@"Desert" atIndex:2];
     [leftTabController setButtonName:@"Drinks" atIndex:3];
+    [leftTabController setButtonName:@"Soup/Salad" atIndex:4];
+
     leftTabController.selectedTitle=@"Appetizer";
-    [leftTabController selectButtonWithIndex:1 delegate:YES];
     
     CGFloat ypos=self.tabScrollerView.frame.origin.y+ self.tabScrollerView.bounds.size.height;
 
@@ -219,7 +277,8 @@
 }
 - (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
 {
-    ripePage=[[RipePagePopOver alloc]initWithMenu:@"test"];
+    [ripePage.view removeFromSuperview];
+    ripePage=[ripePages objectAtIndex:selection];
     ripePage.delegate=self;
     [self.menuView addSubview:ripePage.view];
     

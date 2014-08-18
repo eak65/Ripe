@@ -55,7 +55,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        [self.navigationController pushViewController:[[FoodSelectorController alloc]initWithType:type] animated:YES];
+        [self.navigationController pushViewController:[[FoodSelectorController alloc]initWithType:type andSearchResult:[self.totalSearchResult objectAtIndex:indexPath.row]] animated:YES];
 }
 
 @end

@@ -15,6 +15,7 @@
 @property(nonatomic, strong) NSMutableArray *photoReferences;
 @property(nonatomic,strong)NSMutableArray * photoUrls;
 @property(nonatomic, strong) NSString *address;
+@property(nonatomic, strong) NSString *id;
 -(void)setPhotoUrls;
 
 @end
