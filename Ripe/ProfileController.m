@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
 #import "RatingViewController.h"
-
+#import "LoginController.h"
 #import "ProfileController.h"
 @interface ProfileController ()
 {
@@ -31,9 +31,25 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+-(void)logout
+{
+
+    [DataManager shared].userId=nil;
+    NSUserDefaults * user =[[NSUserDefaults alloc]init];
+    NSString *u=[user objectForKey:@"UserId"];
+    [user removeObjectForKey:@"UserId"];
+    [user synchronize];
+    u=[user objectForKey:@"UserId"];
+
+    [self.delegate didLogout:self];
+
+    
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
     self.profileImage.image=[UIImage imageNamed:@"me.jpg"];
     ratingController = [[RatingViewController alloc]init];
     self.navigationController.navigationBar.translucent=NO;

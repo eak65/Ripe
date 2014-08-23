@@ -14,18 +14,18 @@
 @implementation SearchResult
 
 -(id)init{
-    self.photoReferences=[NSMutableArray array];
-     self.photoUrls=[NSMutableArray array];
+  // self.photoReferences=[NSMutableArray array];
+   // self.photoUrls=[NSMutableArray array];
     return self;
 }
 -(void)setPhotoUrls
 {
 
-    for(NSString *reference in self.photoReferences)
-    {
-        [self.photoUrls addObject:[NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/photo?photoreference=%@&sensor=true&key=%@&maxwidth=400",reference,kGOOGLE_API_KEY]]];
+   // for(NSString *reference in self.photoReferences)
+    //{
+      //  [self.photoUrls addObject:[NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/photo?photoreference=%@&sensor=true&key=%@&maxwidth=400",reference,kGOOGLE_API_KEY]]];
         
-    }
+    //}
     
 }
 @end

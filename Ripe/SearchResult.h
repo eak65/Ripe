@@ -11,10 +11,10 @@
 #import "constants.h"
 @interface SearchResult : NSObject
 @property (nonatomic,strong)NSString * name;
-@property(nonatomic,strong) CLLocation *location;
-@property(nonatomic, strong) NSMutableArray *photoReferences;
-@property(nonatomic,strong)NSMutableArray * photoUrls;
-@property(nonatomic, strong) NSString *address;
+@property(nonatomic,strong) NSString *has_menu;
+@property(nonatomic, strong) NSMutableArray *resource_uri;
+@property(nonatomic,strong)NSMutableArray * phone;
+@property(nonatomic, strong) NSString *street_address;
 @property(nonatomic, strong) NSString *id;
 -(void)setPhotoUrls;
 

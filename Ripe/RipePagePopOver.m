@@ -8,6 +8,7 @@
 
 #import "RipePagePopOver.h"
 #import "InfoController.h"
+#import "Rating.h"
 #import "RatingViewController.h"
 #import "SlidingMenuController.h"
 #import "Menu.h"
@@ -17,6 +18,7 @@
     NSString *menuLabel;
     Menu *menu;
     NSMutableArray *scrollViews;
+    int currentPage;
 }
 @end
 
@@ -41,8 +43,8 @@
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.delegate didChangeViews];
-
+   
+    [self.delegate willBeginToChangeViews];
 }
 
 -(void)back:(id)sender
@@ -50,28 +52,58 @@
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)viewDidLoad
+-(void)setFoodItemList:(NSMutableArray *)list
 {
-    [super viewDidLoad];
-    self.navigationController.delegate=self;
-    [self.view superview];
-    self.appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    scrollViews =[NSMutableArray array];
-    self.transView =[NSMutableArray array];
-    self.navigationController.navigationBar.translucent=NO;
-    UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(back:)];
-    self.pageControl.userInteractionEnabled=NO;
-    self.navigationItem.leftBarButtonItem=left;
-    self.items =menu.foodItems;
-  
-    self.scrollView.clipsToBounds=YES;
-    if(self.items.count>0){
-    self.pageControl.numberOfPages=self.items.count;
-    self.pageControl.pageIndicatorTintColor=[UIColor redColor];
-    self.pageControl.currentPageIndicatorTintColor=[UIColor greenColor];
-    self.pageControl.currentPage=0;
-     UIView *subview;
+    self.items=list;
+    [self averageRankForFood:list];
+}
+-(void)averageRankForFood:(NSMutableArray *) oldlist
+{
+   
+    for(FoodItem * food in oldlist)
+    {
+        int count=0;
+        int total=0;
+
+        for(Rating *r in food.Ratings)
+        {
+            total+=[r.Score intValue];
+            count++;
+        }
+        if(count>0)
+      food.rank=total/count;
+        else
+            food.rank=0;
+    }
+    
+    self.items=[NSMutableArray arrayWithArray:[self bubbleSort:oldlist]];
+
+}
+
+-(NSArray *)bubbleSort:(NSMutableArray *)unsortedDataArray
+{
+    long count = unsortedDataArray.count;
+    int i;
+    bool swapped = TRUE;
+    while (swapped){
+        swapped = FALSE;
+        for (i=1; i<count;i++)
+        {
+            if (((FoodItem *)[unsortedDataArray objectAtIndex:(i-1)]).rank < ((FoodItem *)[unsortedDataArray objectAtIndex:i]).rank)
+            {
+                [unsortedDataArray exchangeObjectAtIndex:(i-1) withObjectAtIndex:i];
+                swapped = TRUE;
+            }
+            //bubbleSortCount ++; //Increment the count everytime a switch is done, this line is not required in the production implementation.
+        }
+    }
+    return unsortedDataArray;
+}
+
+-(void)reload{
+    UIView *subview;
+    [scrollViews removeAllObjects];
+
     for(int i =0; i< self.items.count;i++)
     {
         int rank = i;
@@ -87,9 +119,9 @@
         [sliding.view setFrame:frame];
         [info.view setFrame:frame];
         sliding.navigationController=self.navigationController;
-      //  [info.view setFrame:sliding.foodImage.frame];
-       
-     
+        //  [info.view setFrame:sliding.foodImage.frame];
+        
+        
         sliding.detailed=info;
         
         NSLog(@"%f %f",sliding.view.frame.size.width,sliding.view.frame.size.height);
@@ -98,21 +130,43 @@
         [scrollViews addObject:sliding];
         sliding.foodNameLabel.text=[NSString stringWithFormat:@"%d",i];
         sliding.foodItem=[self.items objectAtIndex:i];
-
+        
         //[subview addSubview:sliding.view];
-       // [subview setBackgroundColor:[UIColor greenColor]];
+        // [subview setBackgroundColor:[UIColor greenColor]];
         [self.scrollView addSubview:sliding.view];
         [self.scrollView bringSubviewToFront:sliding.view];
-
-    }}
-    
+        
+    }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.items.count, 0);
+
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationController.delegate=self;
+    [self.view superview];
+    self.appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    scrollViews =[NSMutableArray array];
+    self.transView =[NSMutableArray array];
+    self.navigationController.navigationBar.translucent=NO;
+    UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(back:)];
+    self.navigationItem.leftBarButtonItem=left;
+    //self.items =menu.foodItems;
+  
+    self.scrollView.clipsToBounds=YES;
+    if(self.items.count>0){
+  
+        currentPage=0;
+        [self reload];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     if(self.items.count>0){
-    SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
+    SlidingMenuController * sl=[scrollViews objectAtIndex:currentPage];
     self.appDelegate.food=sl.foodItem;
         
     }
@@ -130,13 +184,16 @@
 
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page= floor((self.scrollView.contentOffset.x-pageWidth/2) / pageWidth)+1;
-    int current = (int)self.pageControl.currentPage;
-    self.pageControl.currentPage=page;
-    SlidingMenuController * sl=[scrollViews objectAtIndex:self.pageControl.currentPage];
+    
+    SlidingMenuController * sl=[scrollViews objectAtIndex:currentPage];
 
-    if(current !=page)
+    if(currentPage !=page)
     {
             [sl.detailed reverse];
+        currentPage=page;
+        NSInteger i= currentPage;
+        NSLog(@"%ld",(long)i);
+        [self.delegate didChangeViewsToSelection:currentPage];
 
     }
     

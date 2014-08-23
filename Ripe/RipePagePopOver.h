@@ -10,13 +10,13 @@
 #import "Menu.h"
 #import "InfoController.h"
 @protocol RipePageDelegate
--(void)didChangeViews;
+-(void)willBeginToChangeViews;
+-(void)didChangeViewsToSelection:(int)selection;
 @end
 @interface RipePagePopOver : UIViewController  <UINavigationControllerDelegate,UIScrollViewDelegate>
 @property(strong,nonatomic) id <RipePageDelegate>delegate;
 @property(weak,nonatomic)AppDelegate * appDelegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (strong, nonatomic) NSMutableDictionary * viewDictionary;
 @property (strong, nonatomic) InfoController *infoController;
@@ -25,4 +25,6 @@
 @property (strong, nonatomic) NSMutableArray *scrollViews;
 @property (strong, nonatomic) NSMutableArray *transView;
 -(id)initWithMenu:(Menu *)m;
+-(void)setFoodItemList:(NSMutableArray *)list;
+-(void)reload;
 @end

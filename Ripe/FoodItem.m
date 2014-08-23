@@ -9,5 +9,12 @@
 #import "FoodItem.h"
 
 @implementation FoodItem
+-(id)init{
 
+   self= [super init];
+    [self setValue:@"Rating" forKeyPath:@"propertyArrayMap.Ratings"];
+    [self setValue:@"Photos" forKeyPath:@"propertyArrayMap.Photos"];
+
+    return self;
+}
 @end

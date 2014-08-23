@@ -127,13 +127,13 @@
        float longitude= self.location.coordinate.longitude;
         float latitude= self.location.coordinate.latitude;
 
-          parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"query",@"true",@"sensor",kGOOGLE_API_KEY,@"key",@"5000",@"radius",[NSString stringWithFormat:@"%f,%f",latitude,longitude],@"location",@"restaurant|food",@"types",nil];
+           parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"name",kLocu_API_KEY,@"api_key",nil];
     }
     else{ // nolocation search
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"query",@"false",@"sensor",kGOOGLE_API_KEY,@"key",@"restaurant|food",@"types",nil];
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"name",kLocu_API_KEY,@"api_key",nil];
         
     }
-    url=@"https://maps.googleapis.com/maps/api/place/textsearch/json";
+    url=@"https://api.locu.com/v1_0/venue/search/";
     DoAlertView * alert=[[DoAlertView alloc]init];
     alert.nAnimationType=3;
     [alert doAlert:@"Searching" body:@"Searching..." duration:0.0 done:^(DoAlertView *alertView) {
@@ -145,7 +145,7 @@
         NSLog(@"%@",operation.request.URL);
         
         NSDictionary *r = responseObject;
-        NSArray *results =[r objectForKey:@"results"];
+        NSArray *results =[r objectForKey:@"objects"];
         [self.totalSearchResult removeAllObjects];
         SearchResult *searchResult;
         for(NSDictionary *dict in results)
@@ -157,20 +157,21 @@
                                                                      error:&error];
 
             
-            double latitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
-            double longitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+        //    double latitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+        //    double longitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
             searchResult=[[SearchResult alloc]initWithJSONData:dataFromDict];
 
-            searchResult.location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
-            searchResult.address=[dict objectForKey:@"formatted_address"];
-            searchResult.name=[dict objectForKey:@"name"];
-            NSArray * array=[NSArray arrayWithArray:[dict objectForKey:@"photos"]];
+      //      searchResult.location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+           // searchResult.address=[dict objectForKey:@"formatted_address"];
+           // searchResult.name=[dict objectForKey:@"name"];
+     /*       NSArray * array=[NSArray arrayWithArray:[dict objectForKey:@"photos"]];
            
                 for(NSDictionary *ph in array)
                 {
                     [searchResult.photoReferences addObject:[ph objectForKey:@"photo_reference"]];
 
                 }
+      */
             
             [self.totalSearchResult addObject:searchResult];
         }
@@ -202,7 +203,7 @@
     SearchResult * searchResult=[self.totalSearchResult objectAtIndex:indexPath.row];
     
     result.textLabel.text=searchResult.name;
-    result.detailTextLabel.text=searchResult.address;
+    result.detailTextLabel.text=searchResult.street_address;
 
     
     return result;

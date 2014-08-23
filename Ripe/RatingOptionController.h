@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "RNBlurModalView.h"
-
+#import "FoodItem.h"
 @interface RatingOptionController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *foodImage;
 
 @property (nonatomic ,strong) RNBlurModalView *modal;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
-
+-(id)initWithFoodItem:(FoodItem *)food;
 - (IBAction)postReviewButton:(id)sender;
 
 @end

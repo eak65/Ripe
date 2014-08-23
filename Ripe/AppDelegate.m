@@ -61,8 +61,20 @@
     self.window.rootViewController=tabBar;
     [self.window makeKeyAndVisible];
     
-   [self.mainNav presentViewController:navigation animated:YES completion:nil];
+    NSUserDefaults *user=[[NSUserDefaults alloc]init];
     
+    [DataManager shared].userId=[user objectForKey:@"UserId"];
+    if([DataManager shared].userId)
+    {
+        [DataManager shared].firstName=[user objectForKey:@"FirstName"];
+        [DataManager shared].lastName=[user objectForKey:@"LastName"];
+        [DataManager shared].email=[user objectForKey:@"Email"];
+        [DataManager shared].password=[user objectForKey:@"Password"];
+        
+    }
+    else{
+   [self.mainNav presentViewController:navigation animated:YES completion:nil];
+    }
  
     return YES;
 }
@@ -99,8 +111,9 @@
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex
 {
+    NSString * userId=[DataManager shared].userId;
     
-    if([item.title isEqualToString:@"Photo"]||[item.title isEqualToString:@"Rank"])
+    if(([item.title isEqualToString:@"Photo"]||[item.title isEqualToString:@"Rank"])&&userId)
     {
         int type;
         if([item.title isEqualToString:@"Photo"]){
@@ -138,9 +151,9 @@
         }
     }
     
-    else if([item.title isEqualToString:@"Profile"])
+    else
     {
-        if(![DataManager shared].firstName)
+        if(![DataManager shared].userId)
         {
         LoginController * login=[[LoginController alloc]init];
         UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];
@@ -149,6 +162,7 @@
         else{
             
             ProfileController *profile=[[ProfileController alloc]init];
+            profile.delegate=self;
             UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:profile];
 
             [self.mainNav presentViewController:navigation animated:YES completion:nil];
@@ -159,6 +173,15 @@
         
     }
     [gridMenu dismissAnimated:YES];
+}
+-(void)didLogout:(id)sender
+{
+    ProfileController * profile=sender;
+    [profile dismissViewControllerAnimated:YES completion:^{
+        LoginController * login=[[LoginController alloc]init];
+        UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];
+        [self.mainNav presentViewController:navigation animated:YES completion:nil];
+    }];
 }
 -(void)gridMenuWillDismiss:(RNGridMenu *)gridMenu
 {

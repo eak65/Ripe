@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RipePagePopOver">
             <connections>
-                <outlet property="pageControl" destination="KvF-ok-X9X" id="UwN-0S-rh7"/>
                 <outlet property="scrollView" destination="5Ps-oj-Sw9" id="mBt-lw-Rkw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,22 +22,13 @@
                         <outlet property="delegate" destination="-1" id="Ce0-Dp-GGn"/>
                     </connections>
                 </scrollView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KvF-ok-X9X">
-                    <rect key="frame" x="101" y="9" width="106" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="106" id="QKJ-yB-eBA"/>
-                    </constraints>
-                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="5Ps-oj-Sw9" firstAttribute="top" secondItem="KvF-ok-X9X" secondAttribute="bottom" constant="51" id="4gh-nl-L89"/>
                 <constraint firstItem="5Ps-oj-Sw9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="97" id="Gbq-fD-xCm"/>
                 <constraint firstAttribute="bottom" secondItem="5Ps-oj-Sw9" secondAttribute="bottom" id="PvJ-oF-FB8"/>
                 <constraint firstItem="5Ps-oj-Sw9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W0I-CZ-ERu"/>
                 <constraint firstAttribute="trailing" secondItem="5Ps-oj-Sw9" secondAttribute="trailing" id="dKY-X5-8KD"/>
-                <constraint firstItem="KvF-ok-X9X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="101" id="l3t-UI-08Q"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

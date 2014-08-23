@@ -133,6 +133,14 @@ DoAlertView * alertView;
         [DataManager shared].email=[responseObject objectForKey:@"Email"];
         [DataManager shared].password = [responseObject objectForKey:@"Password"];
         
+        NSUserDefaults * user = [[NSUserDefaults alloc]init];
+        [user setObject:[DataManager shared].userId forKey:@"UserId"];
+        [user setObject:[DataManager shared].firstName forKey:@"FirstName"];
+        [user setObject:[DataManager shared].lastName forKey:@"LastName"];
+        [user setObject:[DataManager shared].email forKey:@"Email"];
+        [user setObject:[DataManager shared].password forKey:@"Password"];
+
+        [user synchronize];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

@@ -21,7 +21,8 @@
 #import "GAILogger.h"
 #import "GAITrackedViewController.h"
 #import "GAITracker.h"
-@interface AppDelegate : UIResponder <UITabBarDelegate,UIApplicationDelegate,BaseViewDelegate , RNGridMenuDelegate>{
+#import "ProfileController.h"
+@interface AppDelegate : UIResponder <UITabBarDelegate,UIApplicationDelegate,BaseViewDelegate ,ProfileDelegate, RNGridMenuDelegate>{
 }
 
 @property (strong, nonatomic) UIWindow *window;

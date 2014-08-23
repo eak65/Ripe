@@ -9,14 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface FoodItem : NSObject
-
+-(id)init;
 @property(strong,nonatomic)NSString * Name;
 @property(strong,nonatomic)NSString * Description;
 @property(strong,nonatomic)NSString * Price;
 @property(strong,nonatomic)NSString * Id;
 @property(strong,nonatomic)NSString * MenuSectionId;
 @property(strong,nonatomic)NSString * Type;
-
-
+@property(strong,nonatomic)NSArray *Ratings;
+@property(strong,nonatomic)NSArray *Photos;
+@property(nonatomic)double rank;
 
 @end

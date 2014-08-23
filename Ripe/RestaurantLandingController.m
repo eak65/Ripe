@@ -13,6 +13,7 @@
 #import "ExtraInfoController.h"
 #import <AFNetworking.h>
 #import "RatingCell.h"
+#import "Rating.h"
 #import "constants.h"
 #import "NSObject+ObjectMap.h"
 #import "SearchController.h"
@@ -30,8 +31,12 @@
     SlidingMenuController *slider;
     RipePagePopOver * ripePage;
     Restaurant * restaurant;
+    FoodItem * currentFoodItem;
     NSMutableArray * ripePages;
     UIImageView *logoView ;
+    int currentMenuSelection;
+    int currentFoodItemSelection;
+
 }
 @end
 
@@ -75,8 +80,8 @@
     }];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]initWithBaseURL:[NSURL URLWithString:KBaseUrl]];
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
-    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.searchResult.id,@"googleId",self.searchResult.name,@"name",[NSString stringWithFormat:@"%f",self.searchResult.location.coordinate.latitude ],@"lat",[NSString stringWithFormat:@"%f",self.searchResult.location.coordinate.longitude],@"lon", nil];
-    [manager GET:@"/api/Restaurant/GetRestaurantFromGoogle" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:self.searchResult.id,@"locuId", nil];
+    [manager GET:@"/api/Restaurant/GetRestaurant" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [alert hideAlert];
         if(operation.response.statusCode==204)
         {
@@ -92,16 +97,36 @@
                                                                  error:&error];
 
          restaurant=[[Restaurant alloc] initWithJSONData:dataFromDict];
+          //  [ripePages removeAllObjects];
             
+            [((RipePagePopOver *)ripePages[0]) setFoodItemList:restaurant.Appetizer.foodItems];
+            [((RipePagePopOver *)ripePages[1]) setFoodItemList:restaurant.Entree.foodItems ];
+            [((RipePagePopOver *)ripePages[2]) setFoodItemList:restaurant.Drink.foodItems];
+            [((RipePagePopOver *)ripePages[3]) setFoodItemList:restaurant.Dessert.foodItems];
+            [((RipePagePopOver *)ripePages[4]) setFoodItemList:restaurant.SoupSalad.foodItems];
+            
+            
+            
+           // ((RipePagePopOver *)ripePages[5]).items =restaurant.Appetizer.foodItems;
+/*
         [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Appetizer]];
             [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Entree]];
             [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Dessert]];
             [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.Drink]];
             [ripePages addObject:[[RipePagePopOver alloc]initWithMenu:restaurant.SoupSalad]];
+ */
             AppDelegate * delegate=(AppDelegate *)[[UIApplication sharedApplication]delegate];
             delegate.restaurant= restaurant;
-    
-            [leftTabController selectButtonWithIndex:1 delegate:YES];
+           [leftTabController selectButtonWithIndex:currentMenuSelection delegate:YES];
+            
+            [self.tableview reloadData];
+            
+            
+            
+            
+            
+            
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [alert hideAlert];
@@ -112,10 +137,11 @@
 {
     
 }
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getLandingPage];
     ripePages=[NSMutableArray array];
    int yoffset= self.navigationController.navigationBar.frame.size.height;
     [self.scrollView setFrame:CGRectMake(0, yoffset*2+20, 320, self.scrollView.frame.size.height)];
@@ -130,7 +156,10 @@
     
     UITapGestureRecognizer * touchMenu=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(restaurantPhotoTouched)];
     int width=(self.view.frame.size.width/2)+20;
-   
+    for(int i =0;i<5;i++)
+    {
+        [ripePages addObject:[[RipePagePopOver alloc] init]];
+    }
    // logoView = [[UIImageView alloc] initWithFrame:CGRectMake(width,10,25,25)];
     
     
@@ -148,7 +177,7 @@
     
     self.restaurantImage.image=[UIImage imageNamed:@"placeholder.jpeg"];
     
-    [self getImage];
+   // [self getImage];
    // self.title=self.searchResult.name;
     self.menuView.userInteractionEnabled=YES;
 
@@ -210,6 +239,11 @@
 
     [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.tableview.frame.size.height+self.tableview.frame.origin.y)];
 
+    
+    [self didChangeViewsToSelection:0];
+    [leftTabController selectButtonWithIndex:1 delegate:YES];
+
+
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,7 +253,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    if(currentFoodItem)
+    {
+    return currentFoodItem.Ratings.count;
+    }
+    else{
+        return 0;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -240,6 +280,7 @@
             }
         }
     }
+    Rating *rating=currentFoodItem.Ratings[indexPath.row];
     
     cell.commentTextView.layer.cornerRadius=5.0;
     cell.commentTextView.layer.borderColor=[[UIColor grayColor] CGColor];
@@ -248,11 +289,11 @@
     cell.ratingImage.userInteractionEnabled=NO;
     cell.userNameLabel.userInteractionEnabled=NO;
     cell.dateLabel.userInteractionEnabled=NO;
-    cell.ratingImage.image=[UIImage imageNamed:@"mean.jpeg"];
+   // cell.ratingImage.image=[UIImage imageNamed:@"mean.jpeg"];
     cell.dateLabel.text=[NSString stringWithFormat:@"%@",[NSDate date] ];
-    cell.userNameLabel.text=@"Ethan";
-    cell.profileImage.image=[UIImage imageNamed:@"me.jpg"];
-    
+    cell.userNameLabel.text=rating.User.FirstName;
+    cell.profileImage.image=[UIImage imageNamed:@"placeholder.png"];
+    cell.commentTextView.text=rating.Review;
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 
@@ -267,27 +308,56 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self didChangeViews];
+    [self getLandingPage];
 }
--(void)didChangeViews
+-(void)willBeginToChangeViews
 {
-   
-        [self.scrollView setContentOffset:CGPointMake(0, self.restaurantImage.frame.size.height) animated:YES];
-  
+    [self.scrollView setContentOffset:CGPointMake(0, self.restaurantImage.frame.size.height) animated:YES];
+
+}
+-(void)didChangeViewsToSelection:(int)selection
+{
+    if(ripePage.items.count>0)
+    {
+    currentFoodItem = [ripePage.items objectAtIndex:selection];
+     //   currentFoodItemSelection=ripePage.pageControl.currentPage;
+    }
+    else{
+        currentFoodItem=nil;
+    }
+    [self.tableview reloadData];
+
 }
 - (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
 {
-    [ripePage.view removeFromSuperview];
+    currentMenuSelection=selection;
+   // if(self.menuView.subviews)
+   // [ripePage.view removeFromSuperview];
+    if(ripePages.count>0){
     ripePage=[ripePages objectAtIndex:selection];
     ripePage.delegate=self;
+        [ripePage reload];
     [self.menuView addSubview:ripePage.view];
+       // ripePage.pageControl.currentPage=currentFoodItemSelection;
+        
+    }
+    // once you change menus grab the first option food item
+    if(ripePage.items.count>0){
+    currentFoodItem=ripePage.items[currentFoodItemSelection];
+        
+    }else{
+        currentFoodItem=nil;
+    }
+   [self.tableview reloadData];
+
+    
     
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 160;
 }
-
+/*
 -(void)getImage{
 
 // load image
@@ -309,7 +379,7 @@ UIImage  *placeHolder=[UIImage imageNamed:@"test"];
 else{
       [self.activityIndicator stopAnimating];
 }
-}
+}*/
 
 
 

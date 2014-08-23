@@ -143,7 +143,7 @@
         }
      else if(type==2)
      {
-         [self.navigationController pushViewController:[[RatingOptionController alloc]init] animated:YES];
+         [self.navigationController pushViewController:[[RatingOptionController alloc]initWithFoodItem:item] animated:YES];
      }
     }
     
@@ -230,7 +230,7 @@
     }];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]initWithBaseURL:[NSURL URLWithString:KBaseUrl]];
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
-    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:searchResult.id,@"googleId",searchResult.name,@"name",[NSString stringWithFormat:@"%f",searchResult.location.coordinate.latitude ],@"lat",[NSString stringWithFormat:@"%f",searchResult.location.coordinate.longitude],@"lon", nil];
+    NSDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:searchResult.id,@"locuId", nil];
     [manager GET:@"/api/Restaurant/GetRestaurantFromGoogle" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [alert hideAlert];
         if(operation.response.statusCode==204)

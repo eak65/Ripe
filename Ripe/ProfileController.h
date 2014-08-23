@@ -11,9 +11,12 @@
 #import "DKScrollingTabController.h"
 #import "SBInstagramCollectionViewController.h"
 #import "SBInstagramController.h"
-
+@protocol ProfileDelegate
+-(void)didLogout:(id)sender;
+@end
 
 @interface ProfileController : UIViewController <DKScrollingTabControllerDelegate>
+@property(weak , nonatomic)id<ProfileDelegate>delegate;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *emailField;

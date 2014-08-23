@@ -30,6 +30,6 @@
 @property(nonatomic ,strong)SearchResult * searchResult;
 @property (strong, nonatomic) IBOutlet UIView *menuView;
 - (IBAction)open:(id)sender;
-@property(strong,nonatomic)UITableView * tableview;
+@property(retain,nonatomic)UITableView * tableview;
 
 @end

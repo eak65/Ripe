@@ -149,6 +149,9 @@
 		29A45F19192BD73D0061364B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A45F18192BD73D0061364B /* CoreLocation.framework */; };
 		29A45F1B192BF3930061364B /* SearchResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29A45F1A192BF3930061364B /* SearchResultView.xib */; };
 		29A45F1E192BF6BE0061364B /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A45F1D192BF6BE0061364B /* SearchResult.m */; };
+		29ACFA6019A294BE0048A94E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 29ACFA5F19A294BE0048A94E /* Photo.m */; };
+		29ACFA6319A29E890048A94E /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = 29ACFA6219A29E890048A94E /* Rating.m */; };
+		29ACFA6619A29F040048A94E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29ACFA6519A29F040048A94E /* User.m */; };
 		29C2AB60198F24A00080427C /* seprater_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 29C2AB5F198F24A00080427C /* seprater_line.png */; };
 		29C7F1F8197F19B200672D6F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 29C7F1F7197F19B200672D6F /* placeholder.png */; };
 		29D92B9419A18C80004E0DEE /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29D92B1919A18C7F004E0DEE /* Changelog.txt */; };
@@ -385,6 +388,12 @@
 		29A45F1A192BF3930061364B /* SearchResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultView.xib; sourceTree = "<group>"; };
 		29A45F1C192BF6BE0061364B /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
 		29A45F1D192BF6BE0061364B /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
+		29ACFA5E19A294BE0048A94E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		29ACFA5F19A294BE0048A94E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		29ACFA6119A29E890048A94E /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
+		29ACFA6219A29E890048A94E /* Rating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rating.m; sourceTree = "<group>"; };
+		29ACFA6419A29F040048A94E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		29ACFA6519A29F040048A94E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		29C2AB5F198F24A00080427C /* seprater_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seprater_line.png; path = Ripe/SignUpController/seprater_line.png; sourceTree = "<group>"; };
 		29C7F1F7197F19B200672D6F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		29D92B1919A18C7F004E0DEE /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
@@ -508,6 +517,12 @@
 				2970E88F19A11D6C0077D35E /* SoupSalad.m */,
 				2970E89119A11DA70077D35E /* Dessert.h */,
 				2970E89219A11DA70077D35E /* Dessert.m */,
+				29ACFA5E19A294BE0048A94E /* Photo.h */,
+				29ACFA5F19A294BE0048A94E /* Photo.m */,
+				29ACFA6119A29E890048A94E /* Rating.h */,
+				29ACFA6219A29E890048A94E /* Rating.m */,
+				29ACFA6419A29F040048A94E /* User.h */,
+				29ACFA6519A29F040048A94E /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1291,12 +1306,14 @@
 				29591F4F1977037D00C8EC53 /* SignUpCell.m in Sources */,
 				297A533319535D5300EB13AF /* SBInstagramRefreshControl.m in Sources */,
 				290E184719538E2000155E62 /* PhotoController.m in Sources */,
+				29ACFA6019A294BE0048A94E /* Photo.m in Sources */,
 				297A532C19535D5300EB13AF /* SBInstagramCollectionViewController.m in Sources */,
 				2992A932192BFE4400DA6BBB /* RestaurantLandingController.m in Sources */,
 				29E9EDCE1950C456006EEBDF /* RatingCell.m in Sources */,
 				29A45F1E192BF6BE0061364B /* SearchResult.m in Sources */,
 				2970E89319A11DA70077D35E /* Dessert.m in Sources */,
 				29591F511977037D00C8EC53 /* SignUpController.m in Sources */,
+				29ACFA6319A29E890048A94E /* Rating.m in Sources */,
 				297A533419535D5300EB13AF /* SBInstagramWebViewController.m in Sources */,
 				297A532D19535D5300EB13AF /* SBInstagramController.m in Sources */,
 				2975F1E6197D834200B7ABB5 /* ExtraInfoController.m in Sources */,
@@ -1310,6 +1327,7 @@
 				297A532B19535D5300EB13AF /* SBInstagramCell.m in Sources */,
 				29A45F0F192BC8690061364B /* LoginController.m in Sources */,
 				299C0698192D2D6700DC8280 /* DoAlertView.m in Sources */,
+				29ACFA6619A29F040048A94E /* User.m in Sources */,
 				29A45EE6192BC8140061364B /* main.m in Sources */,
 				297A532E19535D5300EB13AF /* SBInstagramHTTPRequestOperationManager.m in Sources */,
 				290E181919538C3100155E62 /* YCameraViewController.m in Sources */,
