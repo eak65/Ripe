@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appetizers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Appetizer)">
+        <MappingFragment StoreEntitySet="Appetizers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Restaurant)">
+        <MappingFragment StoreEntitySet="Restaurants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+          <ScalarProperty Name="LocuId" ColumnName="LocuId" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="googleId" ColumnName="googleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuSections">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.MenuSection)">
+        <MappingFragment StoreEntitySet="MenuSections">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DessertId" ColumnName="DessertId" />
+          <ScalarProperty Name="DrinkId" ColumnName="DrinkId" />
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="SoupSaladId" ColumnName="SoupSaladId" />
+          <ScalarProperty Name="AppetizerId" ColumnName="AppetizerId" />
+          <ScalarProperty Name="OtherId" ColumnName="OtherId" />
+          <ScalarProperty Name="EntreeId" ColumnName="EntreeId" />
+          <ScalarProperty Name="Entity1Id" ColumnName="Entity1Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodItems">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.FoodItem)">
+        <MappingFragment StoreEntitySet="FoodItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MenuSectionId" ColumnName="MenuSectionId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Rating)">
+        <MappingFragment StoreEntitySet="Ratings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
+          <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Photo)">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="URI" ColumnName="URI" />
+          <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entrees">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Entree)">
+        <MappingFragment StoreEntitySet="Entrees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoupSalads">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.SoupSalad)">
+        <MappingFragment StoreEntitySet="SoupSalads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Other">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Other)">
+        <MappingFragment StoreEntitySet="Other">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drinks">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Drink)">
+        <MappingFragment StoreEntitySet="Drinks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Desserts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Dessert)">
+        <MappingFragment StoreEntitySet="Desserts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PhotoUser" TypeName="Model1.PhotoUser" StoreEntitySet="Photos">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+      <EndProperty Name="Photo">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantDessert" TypeName="Model1.RestaurantDessert" StoreEntitySet="Desserts">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Dessert">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantOther" TypeName="Model1.RestaurantOther" StoreEntitySet="Other">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Other">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSoupSalad" TypeName="Model1.RestaurantSoupSalad" StoreEntitySet="SoupSalads">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="SoupSalad">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DrinkRestaurant" TypeName="Model1.DrinkRestaurant" StoreEntitySet="Drinks">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Drink">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EntreeRestaurant" TypeName="Model1.EntreeRestaurant" StoreEntitySet="Entrees">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Entree">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AppetizerRestaurant" TypeName="Model1.AppetizerRestaurant" StoreEntitySet="Appetizers">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Appetizer">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
