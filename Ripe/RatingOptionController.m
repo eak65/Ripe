@@ -103,6 +103,7 @@
 {
     int scoretemp= (int)indexPath.row;
     scoretemp++;
+    scoretemp=6-scoretemp;
     score= [NSString stringWithFormat:@"%d",scoretemp];;
     [self.modal show];
     

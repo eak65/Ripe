@@ -1,14 +1,14 @@
 //
-//  RatingCellTableViewCell.m
+//  RatingCell.m
 //  Ripe
 //
-//  Created by Ethan Keiser on 9/2/14.
+//  Created by Ethan Keiser on 6/17/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
 
-#import "RatingCell.h"
+#import "ReviewCell.h"
 
-@implementation RatingCell
+@implementation ReviewCell
 
 - (void)awakeFromNib
 {

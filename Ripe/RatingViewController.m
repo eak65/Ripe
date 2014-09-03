@@ -5,20 +5,58 @@
 //  Created by Ethan Keiser on 6/5/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
-
-#import "RatingViewController.h"
+#import "Rating.h"
 #import "RatingCell.h"
+#import "RatingViewController.h"
+#import "ReviewCell.h"
 @interface RatingViewController ()
-
+{
+    NSMutableArray * ratingArray;
+    NSMutableArray * reviewArray;
+}
 @end
 
 @implementation RatingViewController
 
+
+-(id)initWithArray:(NSMutableArray *)dArray andParentView:(UIView *)parentView;
+{
+    ratingArray=[NSMutableArray array];
+    reviewArray=[NSMutableArray array];
+
+    for(Rating * rating in dArray)
+    {
+        if([rating.Review isEqualToString:@""]||rating.Review==nil)
+        {
+            [ratingArray addObject:rating];
+        }
+        else
+        {
+            [reviewArray addObject:rating];
+            [ratingArray addObject:rating];
+        }
+    }
+    [self.view setFrame:parentView.bounds];
+    
+    return [super initWithStyle:UITableViewStyleGrouped];
+}
+
+-(void)setSource:(NSString *)src
+{
+    self.style=src;
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
     self.tableView.backgroundColor=[UIColor clearColor];
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -48,44 +86,82 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 6;
+    if([self.style intValue]==1)
+    return reviewArray.count;
+    else
+        return ratingArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"CellId";
+    if([self.style intValue]==1)
+    {
+    static NSString *CellIdentifier = @"CellIdReview";
     
     
-    RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[RatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"RatingCell" owner:nil options:nil];
+        cell = [[ReviewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"ReviewCell" owner:nil options:nil];
         for(id currentObject in topLevelObjects)
         {
-            if([currentObject isKindOfClass:[RatingCell class]])
+            if([currentObject isKindOfClass:[ReviewCell class]])
             {
-                cell=(RatingCell *)currentObject;
+                cell=(ReviewCell *)currentObject;
                 break;
             }
         }
     }
+     Rating *rating=   [reviewArray objectAtIndex:indexPath.row];
 
     cell.commentTextView.layer.cornerRadius=5.0;
     cell.commentTextView.layer.borderColor=[[UIColor grayColor] CGColor];
     cell.commentTextView.layer.borderWidth=2.0;
     cell.commentTextView.userInteractionEnabled=NO;
     cell.ratingImage.userInteractionEnabled=NO;
+        cell.commentTextView.text=rating.Review;
+    
     cell.userNameLabel.userInteractionEnabled=NO;
     cell.dateLabel.userInteractionEnabled=NO;
     cell.ratingImage.image=[UIImage imageNamed:@"mean.jpeg"];
     cell.dateLabel.text=[NSString stringWithFormat:@"%@",[NSDate date] ];
-    cell.userNameLabel.text=@"Ethan";
+        cell.userNameLabel.text=rating.User.FirstName;
+        cell.score.text=[NSString stringWithFormat:@"%d",[rating.Score intValue]];
+
     cell.profileImage.image=[UIImage imageNamed:@"me.jpg"];
     
     return cell;
+    }
+    else
+    {
+        static NSString *CellIdentifier = @"CellIdRating";
+        
+        
+        RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[RatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"RatingCell" owner:nil options:nil];
+            for(id currentObject in topLevelObjects)
+            {
+                if([currentObject isKindOfClass:[RatingCell class]])
+                {
+                    cell=(RatingCell *)currentObject;
+                    break;
+                }
+            }
+        }
+        
+        Rating * rating=[ratingArray objectAtIndex:indexPath.row];
+        cell.score.text=[rating.Score stringValue];
+        
+        return cell;
+        
+    }
+
 }
 
 
@@ -146,8 +222,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
- 
+ if([self.style intValue]==1)
         return 160;
+ else{
+     return 44;
+ }
     
        
     

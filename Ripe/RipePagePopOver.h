@@ -17,13 +17,13 @@
 @property(strong,nonatomic) id <RipePageDelegate>delegate;
 @property(weak,nonatomic)AppDelegate * appDelegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (strong, nonatomic) NSMutableDictionary * viewDictionary;
 @property (strong, nonatomic) InfoController *infoController;
 @property (strong, nonatomic) NSMutableArray * items;
-
 @property (strong, nonatomic) NSMutableArray *scrollViews;
 @property (strong, nonatomic) NSMutableArray *transView;
+@property (strong, nonatomic) NSNumber *currentIndex;
+@property(strong,nonatomic) FoodItem * selectedFoodItem;
 -(id)initWithMenu:(Menu *)m;
 -(void)setFoodItemList:(NSMutableArray *)list;
 -(void)reload;

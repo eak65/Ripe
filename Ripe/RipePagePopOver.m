@@ -18,7 +18,6 @@
     NSString *menuLabel;
     Menu *menu;
     NSMutableArray *scrollViews;
-    int currentPage;
 }
 @end
 
@@ -63,11 +62,11 @@
     for(FoodItem * food in oldlist)
     {
         int count=0;
-        int total=0;
+        double total=0;
 
         for(Rating *r in food.Ratings)
         {
-            total+=[r.Score intValue];
+            total+=[r.Score doubleValue];
             count++;
         }
         if(count>0)
@@ -158,7 +157,7 @@
     self.scrollView.clipsToBounds=YES;
     if(self.items.count>0){
   
-        currentPage=0;
+        self.currentIndex=0;
         [self reload];
     }
     // Do any additional setup after loading the view from its nib.
@@ -166,7 +165,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     if(self.items.count>0){
-    SlidingMenuController * sl=[scrollViews objectAtIndex:currentPage];
+    SlidingMenuController * sl=[scrollViews objectAtIndex:[self.currentIndex intValue]];
     self.appDelegate.food=sl.foodItem;
         
     }
@@ -185,19 +184,20 @@
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page= floor((self.scrollView.contentOffset.x-pageWidth/2) / pageWidth)+1;
     
-    SlidingMenuController * sl=[scrollViews objectAtIndex:currentPage];
+    SlidingMenuController * sl=[scrollViews objectAtIndex:[_currentIndex intValue]];
 
-    if(currentPage !=page)
+    if([_currentIndex intValue]!=page)
     {
             [sl.detailed reverse];
-        currentPage=page;
-        NSInteger i= currentPage;
+        self.currentIndex= [NSNumber numberWithInt:page];
+        NSInteger i= self.currentIndex;
         NSLog(@"%ld",(long)i);
-        [self.delegate didChangeViewsToSelection:currentPage];
+        self.selectedFoodItem=[self.items objectAtIndex:[_currentIndex intValue]];
+        [self.delegate didChangeViewsToSelection:[_currentIndex intValue]];
 
     }
     
-    self.appDelegate.food=sl.foodItem;
+  //  self.appDelegate.food=sl.foodItem;
     
 
     

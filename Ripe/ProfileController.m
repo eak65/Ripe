@@ -6,13 +6,18 @@
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
 #import "RatingViewController.h"
+#import "Rating.h"
 #import "LoginController.h"
+#import "NSObject+ObjectMap.h"
 #import "ProfileController.h"
+#import <AFNetworking.h>
 @interface ProfileController ()
 {
     DKScrollingTabController *leftTabController;
     SBInstagramCollectionViewController *instagram ;
     RatingViewController * ratingController;
+    NSArray * ratingList;
+    NSArray * reviewList;
 }
 @end
 
@@ -46,9 +51,53 @@
     
     
 }
+-(void)setReviews
+{
+    
+}
+-(void)setRatings
+{
+    
+}
+-(void)getRatings
+{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager manager]initWithBaseURL:[NSURL URLWithString:KBaseUrl]];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    
+    [manager GET:@"/api/Rating/getRatings" parameters:[NSDictionary dictionaryWithObjectsAndKeys:[DataManager shared].userId, @"userId", nil] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+        
+        NSDictionary *r = responseObject;
+        NSMutableArray * ratings=[NSMutableArray array];
+        for(NSDictionary *dict in r)
+        {
+            NSLog(@"%@",dict);
+            NSError *error;
+            NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:dict
+                                                                   options:NSJSONReadingAllowFragments
+                                                                     error:&error];
+         
+            [ratings addObject:[[Rating alloc]initWithJSONData:dataFromDict ]];
+        
+        }
+        
+        ratingController = [[RatingViewController alloc]initWithArray:ratings andParentView:self.selectionView];
+
+        //    double latitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+                                                                                            
+                                                                                            
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self getRatings];
+    
     self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
     self.profileImage.image=[UIImage imageNamed:@"me.jpg"];
     ratingController = [[RatingViewController alloc]init];
@@ -77,8 +126,8 @@
     
     leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0"];
     [leftTabController setButtonName:@"Photos" atIndex:0];
-    [leftTabController setButtonName:@"Ranks" atIndex:1];
-    [leftTabController setButtonName:@"Reviews" atIndex:2];
+    [leftTabController setButtonName:@"Reviews" atIndex:1];
+    [leftTabController setButtonName:@"Ranks" atIndex:2];
     leftTabController.selectedTitle=@"Photos";
 
     
@@ -96,7 +145,7 @@
     
     instagram.showSwitchModeView = YES; //show a segment controller with view option
     
-    [self.selectionView addSubview:instagram.view];
+  //  [self.selectionView addSubview:instagram.view];
 
     //    [instagram refreshCollection]; //refresh instagram feed
     // Do any additional setup after loading the view from its nib.
@@ -123,16 +172,22 @@
     if(selection==0)
     {
         // remove the other two views
-        [ratingController.view removeFromSuperview];
-        [self checkAndRemove:self.selectionView andChildView:instagram.view];
+       // [ratingController.view removeFromSuperview];
+      //  [self checkAndRemove:self.selectionView andChildView:instagram.view];
     }
     else if(selection==1)
     {
         [instagram.view removeFromSuperview];
         
+        [ratingController setSource:@"1"];
+    //    ratingController.view.frame=self.selectionView.bounds;
         [self checkAndRemove:self.selectionView andChildView:ratingController.view];
     }
     else{
+        [instagram.view removeFromSuperview];
+
+        [ratingController setSource:@"2"];
+        [self checkAndRemove:self.selectionView andChildView:ratingController.view];
         
     }
 }

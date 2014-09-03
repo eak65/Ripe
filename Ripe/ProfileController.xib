@@ -20,17 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPj-sf-obm">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EPj-sf-obm">
                     <rect key="frame" x="8" y="8" width="79" height="63"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="63" id="J92-Pj-82d"/>
+                        <constraint firstAttribute="width" constant="79" id="WH9-Gn-hG2"/>
+                    </constraints>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="I love fish" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjU-LE-TEW">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="I love fish" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjU-LE-TEW">
                     <rect key="frame" x="25" y="79" width="285" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KNj-Kt-NiD">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KNj-Kt-NiD">
                     <rect key="frame" x="106" y="8" width="171" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -42,18 +46,37 @@
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48h-Wz-Yru">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48h-Wz-Yru">
                     <rect key="frame" x="0.0" y="100" width="320" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="myG-Zw-ch2">
-                    <rect key="frame" x="0.0" y="161" width="320" height="407"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myG-Zw-ch2">
+                    <rect key="frame" x="0.0" y="151" width="320" height="417"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="PjU-LE-TEW" firstAttribute="top" secondItem="EPj-sf-obm" secondAttribute="bottom" constant="8" symbolic="YES" id="1S5-VN-zXm"/>
+                <constraint firstItem="48h-Wz-Yru" firstAttribute="top" secondItem="EPj-sf-obm" secondAttribute="bottom" constant="29" id="2Vx-sU-y4B"/>
+                <constraint firstItem="48h-Wz-Yru" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7em-uu-SgG"/>
+                <constraint firstItem="myG-Zw-ch2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HgT-x9-sFG"/>
+                <constraint firstAttribute="bottom" secondItem="myG-Zw-ch2" secondAttribute="bottom" id="KOb-ec-WAD"/>
+                <constraint firstAttribute="trailing" secondItem="48h-Wz-Yru" secondAttribute="trailing" id="TQf-7e-NUH"/>
+                <constraint firstItem="EPj-sf-obm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zib-Qs-pzT"/>
+                <constraint firstItem="myG-Zw-ch2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="151" id="bwn-cn-p57"/>
+                <constraint firstItem="KNj-Kt-NiD" firstAttribute="leading" secondItem="EPj-sf-obm" secondAttribute="trailing" constant="19" id="d04-06-7v9"/>
+                <constraint firstItem="EPj-sf-obm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="e23-EQ-oiO"/>
+                <constraint firstItem="EPj-sf-obm" firstAttribute="top" secondItem="KNj-Kt-NiD" secondAttribute="top" id="fj1-MY-7it"/>
+                <constraint firstAttribute="trailing" secondItem="PjU-LE-TEW" secondAttribute="trailing" constant="10" id="saD-Qi-IDr"/>
+                <constraint firstItem="myG-Zw-ch2" firstAttribute="top" secondItem="PjU-LE-TEW" secondAttribute="bottom" constant="49" id="ulF-Wt-ZXy"/>
+                <constraint firstItem="myG-Zw-ch2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="48h-Wz-Yru" secondAttribute="bottom" priority="250" constant="10" id="vyv-t0-VYm"/>
+                <constraint firstItem="myG-Zw-ch2" firstAttribute="top" secondItem="48h-Wz-Yru" secondAttribute="bottom" constant="8" symbolic="YES" id="wwL-zd-D6K"/>
+                <constraint firstItem="PjU-LE-TEW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="x3R-X4-EP1"/>
+                <constraint firstAttribute="trailing" secondItem="myG-Zw-ch2" secondAttribute="trailing" id="z39-JS-byd"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

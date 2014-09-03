@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ExtraInfoController.h"
 #import <AFNetworking.h>
-#import "RatingCell.h"
+#import "ReviewCell.h"
 #import "Rating.h"
 #import "constants.h"
 #import "NSObject+ObjectMap.h"
@@ -137,11 +137,12 @@
 {
     
 }
-
+BOOL firstLoad;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    firstLoad=YES;
     ripePages=[NSMutableArray array];
    int yoffset= self.navigationController.navigationBar.frame.size.height;
     [self.scrollView setFrame:CGRectMake(0, yoffset*2+20, 320, self.scrollView.frame.size.height)];
@@ -266,16 +267,16 @@
     static NSString *CellIdentifier = @"CellId";
     
     
-    RatingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[RatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"RatingCell" owner:nil options:nil];
+        cell = [[ReviewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *topLevelObjects=[[NSBundle mainBundle] loadNibNamed:@"ReviewCell" owner:nil options:nil];
         for(id currentObject in topLevelObjects)
         {
-            if([currentObject isKindOfClass:[RatingCell class]])
+            if([currentObject isKindOfClass:[ReviewCell class]])
             {
-                cell=(RatingCell *)currentObject;
+                cell=(ReviewCell *)currentObject;
                 break;
             }
         }
@@ -294,6 +295,7 @@
     cell.userNameLabel.text=rating.User.FirstName;
     cell.profileImage.image=[UIImage imageNamed:@"placeholder.png"];
     cell.commentTextView.text=rating.Review;
+    cell.score.text=[NSString stringWithFormat:@"%f",[rating.Score doubleValue]];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 
@@ -319,8 +321,12 @@
 {
     if(ripePage.items.count>0)
     {
+        
     currentFoodItem = [ripePage.items objectAtIndex:selection];
-     //   currentFoodItemSelection=ripePage.pageControl.currentPage;
+    currentFoodItemSelection=selection;
+        AppDelegate * delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.food=currentFoodItem;
+    
     }
     else{
         currentFoodItem=nil;
@@ -343,8 +349,14 @@
     }
     // once you change menus grab the first option food item
     if(ripePage.items.count>0){
-    currentFoodItem=ripePage.items[currentFoodItemSelection];
-        
+        currentFoodItem=ripePage.selectedFoodItem;
+        // if the current food is null take the first itema as current food item
+        if(currentFoodItem==nil)
+        {
+            currentFoodItem=ripePage.items[0];
+        }
+        AppDelegate * delegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.food=currentFoodItem;
     }else{
         currentFoodItem=nil;
     }
