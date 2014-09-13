@@ -32,7 +32,11 @@ extern NSString * const kRNBlurDidHidewNotification;
 @interface RNBlurModalView : UIView
 
 @property (assign, readonly) BOOL isVisible;
+<<<<<<< HEAD
 -(void)setContentViewCenter:(CGPoint )centerPoint;
+=======
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @property (assign) CGFloat animationDuration;
 @property (assign) CGFloat animationDelay;
 @property (assign) UIViewAnimationOptions animationOptions;

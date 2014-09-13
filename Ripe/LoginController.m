@@ -5,6 +5,7 @@
 //  Created by Ethan Keiser on 5/20/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
+<<<<<<< HEAD
 #import "AFNetworking.h"
 #import "SearchController.h"
 #import "LoginController.h"
@@ -18,6 +19,16 @@
 
 @end
 DoAlertView * alertView;
+=======
+#import "SearchController.h"
+#import "LoginController.h"
+#import "SignUpController.h"
+
+@interface LoginController ()
+
+@end
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @implementation LoginController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,14 +49,19 @@ DoAlertView * alertView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+<<<<<<< HEAD
     self.navigationController.navigationBar.translucent=NO;
     self.passwordField.delegate=self;
     self.passwordField.secureTextEntry=YES;
+=======
+    self.passwordField.delegate=self;
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     self.userNameField.delegate=self;
     self.title=@"RIPE";
     [self getLocation];
     // Do any additional setup after loading the view from its nib.
 }
+<<<<<<< HEAD
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -62,6 +78,9 @@ DoAlertView * alertView;
     // New SDK versions
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
+=======
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 -(CLLocation *)getLocation
 {
     [[self locationManager] startUpdatingLocation];
@@ -99,7 +118,10 @@ DoAlertView * alertView;
 - (IBAction)signUp:(id)sender {
     
     SignUpController * signUp=[[SignUpController alloc]init];
+<<<<<<< HEAD
     signUp.delegate=self;
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     
     [self.navigationController pushViewController:signUp animated:YES];
     
@@ -109,6 +131,7 @@ DoAlertView * alertView;
 
 - (IBAction)loginButton:(id)sender {
     
+<<<<<<< HEAD
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.passwordField.text,@"password",self.userNameField.text,@"email", nil];
     [self.userNameField resignFirstResponder];
     [self.passwordField resignFirstResponder];
@@ -160,5 +183,12 @@ DoAlertView * alertView;
 //    UIAlertView * alert=[[UIAlertView alloc]initWithTitle:@"Email Sent!" message:@"Please confirm your  email" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
     
  //   [alert show];
+=======
+    SearchController * searchView=[[SearchController alloc]init];
+    [self.userNameField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    [self.navigationController pushViewController:searchView animated:YES];
+    
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 }
 @end

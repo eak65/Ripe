@@ -9,6 +9,7 @@
 #import "RestaurantLandingController.h"
 #import "SearchResult.h"
 #import "UIImageView+AFNetworking.h"
+<<<<<<< HEAD
 #import <AVFoundation/AVFoundation.h>
 #import "ExtraInfoController.h"
 #import <AFNetworking.h>
@@ -39,6 +40,16 @@
     int currentFoodItemSelection;
 
 }
+=======
+#import "AFNetworking.h"
+<<<<<<< HEAD
+#import "RipePagePopOver.h"
+=======
+
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
+@interface RestaurantLandingController ()
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @end
 
 @implementation RestaurantLandingController
@@ -49,6 +60,7 @@
         self.searchResult=search;
     [self.searchResult setPhotoUrls];
     
+<<<<<<< HEAD
                         
 
     
@@ -190,6 +202,43 @@ BOOL firstLoad;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     leftTabController = [[DKScrollingTabController alloc] init];
+=======
+
+
+    
+    return self;
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+<<<<<<< HEAD
+    NSArray *viewAr = [[NSBundle mainBundle] loadNibNamed:@"Menu" owner:self options:nil];
+    self.contentMenuView = [viewAr objectAtIndex:0];
+    
+    [self.menuView addSubview:self.contentMenuView];
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restaurantPhotoTouched)];
+     UITapGestureRecognizer *menuImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(MenuImageTouched)];
+    [self.menuImageView addGestureRecognizer:menuImage];
+    self.menuImageView.userInteractionEnabled = YES;
+=======
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restaurantPhotoTouched)];
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
+    self.restaurantImage.userInteractionEnabled=YES;
+    [self.restaurantImage addGestureRecognizer:newTap];
+    
+    [self.activityIndicator startAnimating];
+    self.activityIndicator.hidesWhenStopped=YES;
+    
+    self.restaurantImage.image=[UIImage imageNamed:@"placeholder.jpeg"];
+    
+    [self getImage];
+    self.title=self.searchResult.name;
+    
+    
+    
+    
+    DKScrollingTabController *leftTabController = [[DKScrollingTabController alloc] init];
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
     leftTabController.delegate = self;
     [self addChildViewController:leftTabController];
@@ -207,11 +256,16 @@ BOOL firstLoad;
     leftTabController.unselectedTextColor = [UIColor grayColor];
     leftTabController.unselectedBackgroundColor = [UIColor clearColor];
     
+<<<<<<< HEAD
     leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0",@"PLACEEEE\n0"];
+=======
+    leftTabController.selection = @[@"PLACE\n0", @"PLACE\n0", @"PLACE\n0", @"PLACE\n0"];
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     [leftTabController setButtonName:@"Appetizer" atIndex:0];
     [leftTabController setButtonName:@"Entree" atIndex:1];
     [leftTabController setButtonName:@"Desert" atIndex:2];
     [leftTabController setButtonName:@"Drinks" atIndex:3];
+<<<<<<< HEAD
     [leftTabController setButtonName:@"Soup/Salad" atIndex:4];
 
     leftTabController.selectedTitle=@"Appetizer";
@@ -371,6 +425,30 @@ BOOL firstLoad;
     return 160;
 }
 /*
+=======
+
+    
+    
+<<<<<<< HEAD
+
+}
+- (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
+{
+    
+=======
+    NSArray *viewAr = [[NSBundle mainBundle] loadNibNamed:@"Menu" owner:self options:nil];
+  self.contentMenuView = [viewAr objectAtIndex:0];
+    
+   [self.menuView addSubview:self.contentMenuView];
+}
+- (void)DKScrollingTabController:(DKScrollingTabController*)controller selection:(NSUInteger)selection
+{
+    self.test.text=@"meow";
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
+    
+}
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 -(void)getImage{
 
 // load image
@@ -383,6 +461,13 @@ UIImage  *placeHolder=[UIImage imageNamed:@"test"];
                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                               [self.activityIndicator stopAnimating];
                               self.restaurantImage.image=image;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                              self.menuImageView.image=image.copy;
+=======
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
                           } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                              
                               NSLog(@"REQUEST FAILED");
@@ -392,24 +477,48 @@ UIImage  *placeHolder=[UIImage imageNamed:@"test"];
 else{
       [self.activityIndicator stopAnimating];
 }
+<<<<<<< HEAD
 }*/
 
 
+=======
+}
+
+<<<<<<< HEAD
+-(void) MenuImageTouched
+{
+    [self.navigationController presentViewController:[[RipePagePopOver alloc]init] animated:YES completion:nil];
+}
+=======
+
+>>>>>>> 679adfcee06c2c82edf9c1d55c6356892cd4f1cb
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 -(void) restaurantPhotoTouched
 {
     // URLs array
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
     
     // Create an array to store IDMPhoto objects
     NSMutableArray *photos = [NSMutableArray new];
     
+<<<<<<< HEAD
    // for (NSURL *url in self.searchResult.photoUrls)
    // {
     
         IDMPhoto *photo = [IDMPhoto photoWithImage:slider.foodImage.image];
         [photos addObject:photo];
     //}
+=======
+    for (NSURL *url in self.searchResult.photoUrls) {
+        IDMPhoto *photo = [IDMPhoto photoWithURL:url];
+        [photos addObject:photo];
+    }
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     
     // Or use this constructor to receive an NSArray of IDMPhoto objects from your NSURL objects
   //  NSArray *photos = [IDMPhoto photosWithURLs:photosURL];
@@ -424,6 +533,9 @@ else{
     // Dispose of any resources that can be recreated.
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @end

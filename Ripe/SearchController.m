@@ -7,7 +7,10 @@
 //
 #import "SearchResult.h"
 #import "AFnetworking.h"
+<<<<<<< HEAD
 #import "NSObject+ObjectMap.h"
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 #import "SearchController.h"
 #import "DoAlertView.h"
 #import "RestaurantLandingController.h"
@@ -77,27 +80,36 @@
     [super viewDidLoad];
     self.searchBar.placeholder=@"Parc or Parc in Philadelphia";
     self.title=@"Search";
+<<<<<<< HEAD
     self.navigationController.navigationBar.translucent=NO;
     UITapGestureRecognizer * gestureRecognizer =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backTouch)];
    // [self.view addGestureRecognizer:gestureRecognizer];
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     [self getLocation];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.totalSearchResult=[NSMutableArray array];
     NSArray *viewAr = [[NSBundle mainBundle] loadNibNamed:@"SearchResultView" owner:self options:nil];
     UIView *popup = [viewAr objectAtIndex:0];
+<<<<<<< HEAD
     
     popup.layer.borderColor = [UIColor greenColor].CGColor;
     popup.layer.borderWidth = 3.0f;
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     self.modal = [[RNBlurModalView alloc] initWithParentView:self.view view:popup];
 
     
 }
+<<<<<<< HEAD
 
 -(void)backTouch{
     
     //[self.searchBar resignFirstResponder];
 }
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 - (CLLocationManager *)locationManager {
     if (_locationManager != nil) {
         return _locationManager;
@@ -127,6 +139,7 @@
        float longitude= self.location.coordinate.longitude;
         float latitude= self.location.coordinate.latitude;
 
+<<<<<<< HEAD
            parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"name",kLocu_API_KEY,@"api_key",nil];
     }
     else{ // nolocation search
@@ -134,6 +147,15 @@
         
     }
     url=@"https://api.locu.com/v1_0/venue/search/";
+=======
+          parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"query",@"true",@"sensor",kGOOGLE_API_KEY,@"key",@"5000",@"radius",[NSString stringWithFormat:@"%f,%f",latitude,longitude],@"location",@"restaurant|food",@"types",nil];
+    }
+    else{ // nolocation search
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:searchText,@"query",@"false",@"sensor",kGOOGLE_API_KEY,@"key",@"restaurant|food",@"types",nil];
+        
+    }
+    url=@"https://maps.googleapis.com/maps/api/place/textsearch/json";
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     DoAlertView * alert=[[DoAlertView alloc]init];
     alert.nAnimationType=3;
     [alert doAlert:@"Searching" body:@"Searching..." duration:0.0 done:^(DoAlertView *alertView) {
@@ -142,15 +164,23 @@
 
     [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+<<<<<<< HEAD
         NSLog(@"%@",operation.request.URL);
         
         NSDictionary *r = responseObject;
         NSArray *results =[r objectForKey:@"objects"];
+=======
+        
+        
+        NSDictionary *r = responseObject;
+        NSArray *results =[r objectForKey:@"results"];
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
         [self.totalSearchResult removeAllObjects];
         SearchResult *searchResult;
         for(NSDictionary *dict in results)
         {
             NSLog(@"%@",dict);
+<<<<<<< HEAD
             NSError *error;
             NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:dict
                                                                    options:NSJSONReadingAllowFragments
@@ -165,13 +195,26 @@
            // searchResult.address=[dict objectForKey:@"formatted_address"];
            // searchResult.name=[dict objectForKey:@"name"];
      /*       NSArray * array=[NSArray arrayWithArray:[dict objectForKey:@"photos"]];
+=======
+            double latitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue];
+            double longitude=[[[[dict objectForKey:@"geometry"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue];
+            searchResult=[[SearchResult alloc]init];
+            searchResult.location=[[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+            
+            searchResult.address=[dict objectForKey:@"formatted_address"];
+            searchResult.name=[dict objectForKey:@"name"];
+            NSArray * array=[NSArray arrayWithArray:[dict objectForKey:@"photos"]];
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
            
                 for(NSDictionary *ph in array)
                 {
                     [searchResult.photoReferences addObject:[ph objectForKey:@"photo_reference"]];
 
                 }
+<<<<<<< HEAD
       */
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
             
             [self.totalSearchResult addObject:searchResult];
         }
@@ -184,8 +227,12 @@
         [alert hideAlert];
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+<<<<<<< HEAD
         [alert hideAlert];
 
+=======
+          
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
       }];
     
   
@@ -203,7 +250,11 @@
     SearchResult * searchResult=[self.totalSearchResult objectAtIndex:indexPath.row];
     
     result.textLabel.text=searchResult.name;
+<<<<<<< HEAD
     result.detailTextLabel.text=searchResult.street_address;
+=======
+    result.detailTextLabel.text=searchResult.address;
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
     
     return result;

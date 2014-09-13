@@ -23,6 +23,7 @@ PODS:
     - AFNetworking (~> 2.2.3)
     - DACircularProgress (~> 2.2)
     - SVProgressHUD (~> 1.0)
+<<<<<<< HEAD
   - NZCircularImageView (0.0.4):
     - UIActivityIndicator-for-SDWebImage (~> 1.0.3)
   - RATreeView (0.2.2)
@@ -34,12 +35,20 @@ PODS:
   - SVProgressHUD (1.0)
   - UIActivityIndicator-for-SDWebImage (1.0.5):
     - SDWebImage (~> 3.2)
+=======
+  - RNBlurModalView (0.1.0)
+  - RNGridMenu (0.1.3)
+  - SVProgressHUD (1.0)
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - IDMPhotoBrowser
+<<<<<<< HEAD
   - NZCircularImageView (~> 0.0.4)
   - RATreeView (~> 0.2.2)
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
   - RNBlurModalView (~> 0.1.0)
   - RNGridMenu (~> 0.1.2)
 
@@ -47,6 +56,7 @@ SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
   IDMPhotoBrowser: d691bcdf470553e165f8eb982c5cd8e9a58bcdef
+<<<<<<< HEAD
   NZCircularImageView: 271166541c73118fff81c4bc83bcd84ceb04befb
   RATreeView: 57c9be7681a469b816b0f9f56ed1816dd8f2f3d7
   RNBlurModalView: 38380c10dcaf7804f7ba5e3516abcaf8bc8eddb3
@@ -54,5 +64,10 @@ SPEC CHECKSUMS:
   SDWebImage: 791cb0f588046cb0bb7802ae8ae8f5462947b773
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   UIActivityIndicator-for-SDWebImage: d9e46f1592d04cfbeda67bb6d7bba5348558697b
+=======
+  RNBlurModalView: 38380c10dcaf7804f7ba5e3516abcaf8bc8eddb3
+  RNGridMenu: 7a5c2c0ad78d254d047c43efe502eee2b16fbcbc
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 COCOAPODS: 0.33.1

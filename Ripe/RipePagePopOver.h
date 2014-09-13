@@ -5,6 +5,7 @@
 //  Created by Ethan Keiser on 5/28/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
+<<<<<<< HEAD
 #import "AppDelegate.h"
 #import <UIKit/UIKit.h>
 #import "Menu.h"
@@ -27,4 +28,11 @@
 -(id)initWithMenu:(Menu *)m;
 -(void)setFoodItemList:(NSMutableArray *)list;
 -(void)reload;
+=======
+
+#import <UIKit/UIKit.h>
+
+@interface RipePagePopOver : UIViewController
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @end

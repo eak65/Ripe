@@ -38,7 +38,10 @@
 @property (nonatomic,strong) UIColor *unselectedBackgroundColor;
 @property (nonatomic,assign) BOOL underlineIndicator;
 @property (nonatomic,strong) UIColor *underlineIndicatorColor;
+<<<<<<< HEAD
 @property (nonatomic,strong) NSString *selectedTitle;
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 // Number of lines for select control items (buttons)
 @property (nonatomic,assign) NSInteger numberOfLines;

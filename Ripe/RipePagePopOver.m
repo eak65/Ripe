@@ -7,6 +7,7 @@
 //
 
 #import "RipePagePopOver.h"
+<<<<<<< HEAD
 #import "InfoController.h"
 #import "Rating.h"
 #import "RatingViewController.h"
@@ -19,15 +20,23 @@
     Menu *menu;
     NSMutableArray *scrollViews;
 }
+=======
+
+@interface RipePagePopOver ()
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @end
 
 @implementation RipePagePopOver
 
+<<<<<<< HEAD
 -(id)initWithMenu:(Menu *)m
 {
     menu=m;
     return self;
 }
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,6 +45,7 @@
     }
     return self;
 }
+<<<<<<< HEAD
 -(void)viewWillDisappear:(BOOL)animated
 {
 //self.appDelegate.food=nil;
@@ -140,10 +150,13 @@
 
 
 }
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+<<<<<<< HEAD
     self.navigationController.delegate=self;
     [self.view superview];
     self.appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -202,6 +215,10 @@
 
     
 }
+=======
+    // Do any additional setup after loading the view from its nib.
+}
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 
 - (void)didReceiveMemoryWarning
 {
@@ -209,5 +226,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @end

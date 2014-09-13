@@ -150,7 +150,10 @@
 
 - (void)selectButtonWithIndex:(NSUInteger)index delegate:(BOOL)delegate {
     UIButton *button = self.buttons[index];
+<<<<<<< HEAD
    self.selectedTitle= [[self.buttons objectAtIndex:index] titleLabel].text;
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     [self dk_controlSelect:button];
         
     if (delegate) {
@@ -199,7 +202,10 @@
 
 - (void)setButtonName:(NSString*)name atIndex:(NSUInteger)index {
     UIButton *button = self.buttons[index];
+<<<<<<< HEAD
    // [button setBackgroundImage:[UIImage imageNamed:@"me.jpg"] forState:UIControlStateNormal];
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     [button setTitle:name forState:UIControlStateNormal];
     
     //TODO: update layout (in particular, button widths)
@@ -279,7 +285,10 @@
     [self.buttonsScrollView scrollRectToVisible:frame animated:YES];
     
     self.currentButton = button;
+<<<<<<< HEAD
     self.selectedTitle=self.currentButton.titleLabel.text;
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 }
 
 

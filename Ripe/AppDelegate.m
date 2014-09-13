@@ -5,6 +5,7 @@
 //  Created by Ethan Keiser on 5/20/14.
 //  Copyright (c) 2014 Ethan Keiser. All rights reserved.
 //
+<<<<<<< HEAD
 #import "ProfileController.h"
 #import "RestaurantLandingController.h"
 #import "AppDelegate.h"
@@ -15,6 +16,13 @@
 #import "SearchController.h"
 #import "FoodSelectorController.h"
 #import "DataManager.h"
+=======
+
+#import "AppDelegate.h"
+#import "BaseViewController.h"
+#import "LoginController.h"
+#import "SearchController.h"
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -24,6 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+<<<<<<< HEAD
     
     
     
@@ -45,22 +54,30 @@
     
     
     
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     LoginController * login=[[LoginController alloc]init];
     UINavigationController * navigation=[[UINavigationController alloc]initWithRootViewController:login];
     BaseViewController *tabBar = [[BaseViewController alloc]init];
     tabBar.actionDelegate=self;
+<<<<<<< HEAD
 
     tabBar.delegate=self;
       [tabBar addCenterButtonWithImage:[UIImage imageNamed:@"camera_button_take.png"] highlightImage:[UIImage imageNamed:@"tabBar_cameraButton_ready_matte.png"]];
     
+=======
+      [tabBar addCenterButtonWithImage:[UIImage imageNamed:@"camera_button_take.png"] highlightImage:[UIImage imageNamed:@"tabBar_cameraButton_ready_matte.png"]];
+
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
   self.mainNav=[[UINavigationController alloc]initWithRootViewController:[[SearchController alloc]init]];
     NSArray *tabs=[NSArray arrayWithObject:self.mainNav];
     [tabBar setViewControllers:tabs];
     self.window.rootViewController=tabBar;
     [self.window makeKeyAndVisible];
     
+<<<<<<< HEAD
     NSUserDefaults *user=[[NSUserDefaults alloc]init];
     
     [DataManager shared].userId=[user objectForKey:@"UserId"];
@@ -88,6 +105,13 @@
     
     return viewController != tabBarController.selectedViewController;
 }
+=======
+   [self.mainNav presentViewController:navigation animated:YES completion:nil];
+    
+ 
+    return YES;
+}
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 -(void)didSelectCenterButton
 {
     if([self.av isShown])
@@ -96,12 +120,26 @@
     }
     else{
     NSArray *items = @[
+<<<<<<< HEAD
                        [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"arrow"] title:@"Photo"],
                        [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"attachment"] title:@"Rank"],
                        [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"Profile"],
                        
                        ];
     NSInteger numberOfOptions = 3;
+=======
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"arrow"] title:@"Next"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"attachment"] title:@"Attach"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"block"] title:@"Cancel"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"Bluetooth"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"Deliver"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"Download"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                       ];
+    NSInteger numberOfOptions = 9;
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
     self.av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
     self.av.delegate=self;
         [self.av showInViewController:self.mainNav center:CGPointMake(self.mainNav.view.bounds.size.width/2.f, self.mainNav.view.bounds.size.height/2.f)];
@@ -109,6 +147,7 @@
     }
 }
 
+<<<<<<< HEAD
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex
 {
     NSString * userId=[DataManager shared].userId;
@@ -187,6 +226,8 @@
 {
     [gridMenu dismissAnimated:YES];
 }
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -1,1 +1,14 @@
+<<<<<<< HEAD
 <?xml version='1.0' encoding='UTF-8'?><Workspace version='1.0'><FileRef location='group:Ripe.xcodeproj'/><FileRef location='group:Pods/Pods.xcodeproj'/></Workspace>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../Desktop/UIKit/Ripe/Ripe.xcodeproj">
+   </FileRef>
+</Workspace>
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5

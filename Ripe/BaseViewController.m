@@ -60,6 +60,7 @@
   [self.view addSubview:button];
 }
 
+<<<<<<< HEAD
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,6 +69,8 @@
     [self.tabBar  setAlpha:0];//Setting Alpha of TabView.
 
 }
+=======
+>>>>>>> 0af9b84bf3dd249f73c86734ff9ddda3a61be4c5
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;
