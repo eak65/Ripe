@@ -24,6 +24,10 @@ namespace Ripe.Controllers
             List<String> drinks = info["drinks"].ToObject<List<String>>();
             List<String> other = info["other"].ToObject<List<String>>();
             List<String> soup = info["soup"].ToObject<List<String>>();
+            List<String> side = info["side"].ToObject<List<String>>();
+            List<String> breakfast = info["breakfast"].ToObject<List<String>>();
+            List<String> sauce = info["sauce"].ToObject<List<String>>();
+            List<String> special = info["special"].ToObject<List<String>>();
 
             String apikey = "6ad36ca9b012676380f9af057421e65da0cfb61a";
             var client = new HttpClient();
@@ -39,6 +43,10 @@ namespace Ripe.Controllers
             IList<sections> drinkSections = new List<sections>();
             IList<sections> otherSections = new List<sections>();
             IList<sections> soupSections = new List<sections>();
+            IList<sections> sideSections = new List<sections>();
+            IList<sections> breakfastSections = new List<sections>();
+            IList<sections> sauceSections = new List<sections>();
+            IList<sections> specialSections = new List<sections>();
             foreach (menus menu in menus)
             {
                 foreach (sections section in menu.sections)
@@ -53,7 +61,39 @@ namespace Ripe.Controllers
                         }
 
                     }
+                    foreach (String secName in side)
+                    {
+                        if (this.deepEqual(secName, section.section_name))
+                        {
+                            sideSections.Add(section);
+                            break;
+                        }
 
+                    } foreach (String secName in breakfast)
+                    {
+                        if (this.deepEqual(secName, section.section_name))
+                        {
+                            breakfastSections.Add(section);
+                            break;
+                        }
+
+                    } foreach (String secName in sauce)
+                    {
+                        if (this.deepEqual(secName, section.section_name))
+                        {
+                            sauceSections.Add(section);
+                            break;
+                        }
+
+                    } foreach (String secName in special)
+                    {
+                        if (this.deepEqual(secName, section.section_name))
+                        {
+                            specialSections.Add(section);
+                            break;
+                        }
+
+                    }
                     foreach (String secName in entree)
                     {
                         if (this.deepEqual(secName, section.section_name))
@@ -119,7 +159,7 @@ namespace Ripe.Controllers
             restuarant.lon = feed.objects[0].@long;
             using (var db = new Model1Container())
             {
-                Restaurant rest= db.Restaurants.Include("Appetizer").Include("Drink").Include("Other").Include("Dessert").Include("Entree").Include("SoupSalad").Where(r => r.LocuId.Equals(restuarant.LocuId)).FirstOrDefault();
+                Restaurant rest = db.Restaurants.Include("Special").Include("Sauce").Include("Breakfast").Include("Side").Include("Appetizer").Include("Drink").Include("Other").Include("Dessert").Include("Entree").Include("SoupSalad").Where(r => r.LocuId.Equals(restuarant.LocuId)).FirstOrDefault();
                 if (rest != null)
                 {
                     try
@@ -130,7 +170,10 @@ namespace Ripe.Controllers
                         db.Desserts.Remove(rest.Dessert);
                         db.Entrees.Remove(rest.Entree);
                         db.SoupSalads.Remove(rest.SoupSalad);
-
+                        db.Sides.Remove(rest.Side);
+                        db.Breakfasts.Remove(rest.Breakfast);
+                        db.Sauces.Remove(rest.Sauce);
+                        db.Specials.Remove(rest.Special);
                         db.Restaurants.Remove(rest);
                         db.SaveChanges();
                     }
@@ -142,6 +185,7 @@ namespace Ripe.Controllers
                     rest = new Restaurant();
                     db.Restaurants.Add(rest);
                     // super weird
+              
                    rest.Appetizer = new Appetizer();
                 //   rest.Appetizer.Id = rest.Id;
                     rest.Entree = new Entree();
@@ -153,6 +197,10 @@ namespace Ripe.Controllers
                     rest.Other = new Other();
                   //  rest.Other.Id = rest.Id + 4;
                     rest.Drink = new Drink();
+                    rest.Side = new Side();
+                    rest.Breakfast = new Breakfast();
+                    rest.Sauce = new Sauce();
+                    rest.Special = new Special();
                   //  rest.Drink.Id = rest.Id + 5;
                    db.Appetizers.Add(rest.Appetizer);
                     db.Entrees.Add(rest.Entree);
@@ -160,7 +208,10 @@ namespace Ripe.Controllers
                     db.Desserts.Add(rest.Dessert);
                     db.Other.Add(rest.Other);
                     db.Drinks.Add(rest.Drink);
-                
+                    db.Specials.Add(rest.Special);
+                    db.Sauces.Add(rest.Sauce);
+                    db.Breakfasts.Add(rest.Breakfast);
+                    db.Sides.Add(rest.Side);
                 
                     
                     rest.Name = restuarant.Name;
@@ -184,7 +235,10 @@ namespace Ripe.Controllers
                        rest.Dessert.MenuSections = this.getMenuSections(db,dessertSections);
                    rest.Other.MenuSections = this.getMenuSections(db,otherSections);
                      rest.Drink.MenuSections = this.getMenuSections(db,drinkSections);
-              
+                     rest.Side.MenuSections = this.getMenuSections(db, sideSections);
+                     rest.Breakfast.MenuSections = this.getMenuSections(db,breakfastSections);
+                     rest.Sauce.MenuSections = this.getMenuSections(db,sauceSections);
+                     rest.Special.MenuSections = this.getMenuSections(db, specialSections);
                        db.SaveChanges();
              
 

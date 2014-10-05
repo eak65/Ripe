@@ -30,5 +30,6 @@ namespace Ripe.Models
     
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ProfileImage ProfileImage { get; set; }
     }
 }

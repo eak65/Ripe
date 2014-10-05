@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/18/2014 15:29:04
+-- Date Created: 10/02/2014 14:47:57
 -- Generated from EDMX file: C:\Users\Ethan\Documents\Visual Studio 2013\Projects\Ripe\Ripe\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -68,6 +68,33 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AppetizerRestaurant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Appetizers] DROP CONSTRAINT [FK_AppetizerRestaurant];
 GO
+IF OBJECT_ID(N'[dbo].[FK_MenuSectionSpecial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MenuSections] DROP CONSTRAINT [FK_MenuSectionSpecial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MenuSectionBreakfast]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MenuSections] DROP CONSTRAINT [FK_MenuSectionBreakfast];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MenuSectionSide]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MenuSections] DROP CONSTRAINT [FK_MenuSectionSide];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MenuSectionSauce]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MenuSections] DROP CONSTRAINT [FK_MenuSectionSauce];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RestaurantSpecial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Specials] DROP CONSTRAINT [FK_RestaurantSpecial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RestaurantBreakfast]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Breakfasts] DROP CONSTRAINT [FK_RestaurantBreakfast];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RestaurantSide]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sides] DROP CONSTRAINT [FK_RestaurantSide];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RestaurantSauce]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sauces] DROP CONSTRAINT [FK_RestaurantSauce];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProfileImageUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProfileImages] DROP CONSTRAINT [FK_ProfileImageUser];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -108,6 +135,21 @@ IF OBJECT_ID(N'[dbo].[Drinks]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Desserts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Desserts];
+GO
+IF OBJECT_ID(N'[dbo].[Sides]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sides];
+GO
+IF OBJECT_ID(N'[dbo].[Breakfasts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Breakfasts];
+GO
+IF OBJECT_ID(N'[dbo].[Sauces]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sauces];
+GO
+IF OBJECT_ID(N'[dbo].[Specials]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Specials];
+GO
+IF OBJECT_ID(N'[dbo].[ProfileImages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ProfileImages];
 GO
 
 -- --------------------------------------------------
@@ -159,7 +201,11 @@ CREATE TABLE [dbo].[MenuSections] (
     [AppetizerId] int  NULL,
     [OtherId] int  NULL,
     [EntreeId] int  NULL,
-    [Entity1Id] int  NOT NULL
+    [Entity1Id] int  NOT NULL,
+    [SpecialId] int  NULL,
+    [BreakfastId] int  NULL,
+    [SideId] int  NULL,
+    [SauceId] int  NULL
 );
 GO
 
@@ -180,7 +226,10 @@ CREATE TABLE [dbo].[Ratings] (
     [Score] int  NOT NULL,
     [Review] nvarchar(max)  NULL,
     [FoodItemId] int  NOT NULL,
-    [UserUserId] int  NOT NULL
+    [UserUserId] int  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [RestaurantName] nvarchar(max)  NOT NULL,
+    [RestaurantId] int  NOT NULL
 );
 GO
 
@@ -189,6 +238,7 @@ CREATE TABLE [dbo].[Photos] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [URI] nvarchar(max)  NOT NULL,
     [FoodItemId] int  NOT NULL,
+    [Date] datetime  NOT NULL,
     [User_UserId] int  NOT NULL
 );
 GO
@@ -225,6 +275,42 @@ GO
 CREATE TABLE [dbo].[Desserts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Restaurant_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Sides'
+CREATE TABLE [dbo].[Sides] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Restaurant_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Breakfasts'
+CREATE TABLE [dbo].[Breakfasts] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Restaurant_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Sauces'
+CREATE TABLE [dbo].[Sauces] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Restaurant_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Specials'
+CREATE TABLE [dbo].[Specials] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Restaurant_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'ProfileImages'
+CREATE TABLE [dbo].[ProfileImages] (
+    [ProfileImageId] int IDENTITY(1,1) NOT NULL,
+    [URI] nvarchar(max)  NOT NULL,
+    [User_UserId] int  NOT NULL
 );
 GO
 
@@ -302,6 +388,36 @@ GO
 ALTER TABLE [dbo].[Desserts]
 ADD CONSTRAINT [PK_Desserts]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Sides'
+ALTER TABLE [dbo].[Sides]
+ADD CONSTRAINT [PK_Sides]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Breakfasts'
+ALTER TABLE [dbo].[Breakfasts]
+ADD CONSTRAINT [PK_Breakfasts]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Sauces'
+ALTER TABLE [dbo].[Sauces]
+ADD CONSTRAINT [PK_Sauces]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Specials'
+ALTER TABLE [dbo].[Specials]
+ADD CONSTRAINT [PK_Specials]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [ProfileImageId] in table 'ProfileImages'
+ALTER TABLE [dbo].[ProfileImages]
+ADD CONSTRAINT [PK_ProfileImages]
+    PRIMARY KEY CLUSTERED ([ProfileImageId] ASC);
 GO
 
 -- --------------------------------------------------
@@ -544,6 +660,132 @@ ADD CONSTRAINT [FK_AppetizerRestaurant]
 CREATE INDEX [IX_FK_AppetizerRestaurant]
 ON [dbo].[Appetizers]
     ([Restaurant_Id]);
+GO
+
+-- Creating foreign key on [SpecialId] in table 'MenuSections'
+ALTER TABLE [dbo].[MenuSections]
+ADD CONSTRAINT [FK_MenuSectionSpecial]
+    FOREIGN KEY ([SpecialId])
+    REFERENCES [dbo].[Specials]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSpecial'
+CREATE INDEX [IX_FK_MenuSectionSpecial]
+ON [dbo].[MenuSections]
+    ([SpecialId]);
+GO
+
+-- Creating foreign key on [BreakfastId] in table 'MenuSections'
+ALTER TABLE [dbo].[MenuSections]
+ADD CONSTRAINT [FK_MenuSectionBreakfast]
+    FOREIGN KEY ([BreakfastId])
+    REFERENCES [dbo].[Breakfasts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionBreakfast'
+CREATE INDEX [IX_FK_MenuSectionBreakfast]
+ON [dbo].[MenuSections]
+    ([BreakfastId]);
+GO
+
+-- Creating foreign key on [SideId] in table 'MenuSections'
+ALTER TABLE [dbo].[MenuSections]
+ADD CONSTRAINT [FK_MenuSectionSide]
+    FOREIGN KEY ([SideId])
+    REFERENCES [dbo].[Sides]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSide'
+CREATE INDEX [IX_FK_MenuSectionSide]
+ON [dbo].[MenuSections]
+    ([SideId]);
+GO
+
+-- Creating foreign key on [SauceId] in table 'MenuSections'
+ALTER TABLE [dbo].[MenuSections]
+ADD CONSTRAINT [FK_MenuSectionSauce]
+    FOREIGN KEY ([SauceId])
+    REFERENCES [dbo].[Sauces]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSauce'
+CREATE INDEX [IX_FK_MenuSectionSauce]
+ON [dbo].[MenuSections]
+    ([SauceId]);
+GO
+
+-- Creating foreign key on [Restaurant_Id] in table 'Specials'
+ALTER TABLE [dbo].[Specials]
+ADD CONSTRAINT [FK_RestaurantSpecial]
+    FOREIGN KEY ([Restaurant_Id])
+    REFERENCES [dbo].[Restaurants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RestaurantSpecial'
+CREATE INDEX [IX_FK_RestaurantSpecial]
+ON [dbo].[Specials]
+    ([Restaurant_Id]);
+GO
+
+-- Creating foreign key on [Restaurant_Id] in table 'Breakfasts'
+ALTER TABLE [dbo].[Breakfasts]
+ADD CONSTRAINT [FK_RestaurantBreakfast]
+    FOREIGN KEY ([Restaurant_Id])
+    REFERENCES [dbo].[Restaurants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RestaurantBreakfast'
+CREATE INDEX [IX_FK_RestaurantBreakfast]
+ON [dbo].[Breakfasts]
+    ([Restaurant_Id]);
+GO
+
+-- Creating foreign key on [Restaurant_Id] in table 'Sides'
+ALTER TABLE [dbo].[Sides]
+ADD CONSTRAINT [FK_RestaurantSide]
+    FOREIGN KEY ([Restaurant_Id])
+    REFERENCES [dbo].[Restaurants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RestaurantSide'
+CREATE INDEX [IX_FK_RestaurantSide]
+ON [dbo].[Sides]
+    ([Restaurant_Id]);
+GO
+
+-- Creating foreign key on [Restaurant_Id] in table 'Sauces'
+ALTER TABLE [dbo].[Sauces]
+ADD CONSTRAINT [FK_RestaurantSauce]
+    FOREIGN KEY ([Restaurant_Id])
+    REFERENCES [dbo].[Restaurants]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RestaurantSauce'
+CREATE INDEX [IX_FK_RestaurantSauce]
+ON [dbo].[Sauces]
+    ([Restaurant_Id]);
+GO
+
+-- Creating foreign key on [User_UserId] in table 'ProfileImages'
+ALTER TABLE [dbo].[ProfileImages]
+ADD CONSTRAINT [FK_ProfileImageUser]
+    FOREIGN KEY ([User_UserId])
+    REFERENCES [dbo].[Users]
+        ([UserId])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProfileImageUser'
+CREATE INDEX [IX_FK_ProfileImageUser]
+ON [dbo].[ProfileImages]
+    ([User_UserId]);
 GO
 
 -- --------------------------------------------------

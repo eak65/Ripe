@@ -32,5 +32,9 @@ namespace Ripe.Models
         public virtual Drink Drink { get; set; }
         public virtual Entree Entree { get; set; }
         public virtual Appetizer Appetizer { get; set; }
+        public virtual Special Special { get; set; }
+        public virtual Breakfast Breakfast { get; set; }
+        public virtual Side Side { get; set; }
+        public virtual Sauce Sauce { get; set; }
     }
 }

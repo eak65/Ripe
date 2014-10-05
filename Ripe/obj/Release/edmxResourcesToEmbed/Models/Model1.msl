@@ -50,6 +50,10 @@
           <ScalarProperty Name="OtherId" ColumnName="OtherId" />
           <ScalarProperty Name="EntreeId" ColumnName="EntreeId" />
           <ScalarProperty Name="Entity1Id" ColumnName="Entity1Id" />
+          <ScalarProperty Name="SpecialId" ColumnName="SpecialId" />
+          <ScalarProperty Name="BreakfastId" ColumnName="BreakfastId" />
+          <ScalarProperty Name="SideId" ColumnName="SideId" />
+          <ScalarProperty Name="SauceId" ColumnName="SauceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -73,6 +77,9 @@
           <ScalarProperty Name="Review" ColumnName="Review" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
           <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -82,6 +89,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="URI" ColumnName="URI" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -117,6 +125,42 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Dessert)">
         <MappingFragment StoreEntitySet="Desserts">
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sides">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Side)">
+        <MappingFragment StoreEntitySet="Sides">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Breakfasts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Breakfast)">
+        <MappingFragment StoreEntitySet="Breakfasts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sauces">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sauce)">
+        <MappingFragment StoreEntitySet="Sauces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specials">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Special)">
+        <MappingFragment StoreEntitySet="Specials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileImages">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ProfileImage)">
+        <MappingFragment StoreEntitySet="ProfileImages">
+          <ScalarProperty Name="ProfileImageId" ColumnName="ProfileImageId" />
+          <ScalarProperty Name="URI" ColumnName="URI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -174,6 +218,46 @@
       </EndProperty>
       <EndProperty Name="Appetizer">
         <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSpecial" TypeName="Model1.RestaurantSpecial" StoreEntitySet="Specials">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Special">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantBreakfast" TypeName="Model1.RestaurantBreakfast" StoreEntitySet="Breakfasts">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Breakfast">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSide" TypeName="Model1.RestaurantSide" StoreEntitySet="Sides">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Side">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSauce" TypeName="Model1.RestaurantSauce" StoreEntitySet="Sauces">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Sauce">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProfileImageUser" TypeName="Model1.ProfileImageUser" StoreEntitySet="ProfileImages">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+      <EndProperty Name="ProfileImage">
+        <ScalarProperty Name="ProfileImageId" ColumnName="ProfileImageId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

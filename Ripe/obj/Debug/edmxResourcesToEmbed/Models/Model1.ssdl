@@ -13,6 +13,11 @@
     <EntitySet Name="Other" EntityType="Model1.Store.Other" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Drinks" EntityType="Model1.Store.Drinks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Desserts" EntityType="Model1.Store.Desserts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sides" EntityType="Model1.Store.Sides" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Breakfasts" EntityType="Model1.Store.Breakfasts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sauces" EntityType="Model1.Store.Sauces" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specials" EntityType="Model1.Store.Specials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProfileImages" EntityType="Model1.Store.ProfileImages" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="MenuSectionFoodItem" Association="Model1.Store.MenuSectionFoodItem">
       <End Role="MenuSection" EntitySet="MenuSections" />
       <End Role="FoodItem" EntitySet="FoodItems" />
@@ -81,6 +86,42 @@
       <End Role="Appetizer" EntitySet="Appetizers" />
       <End Role="Restaurant" EntitySet="Restaurants" />
     </AssociationSet>
+    <AssociationSet Name="MenuSectionSpecial" Association="Model1.Store.MenuSectionSpecial">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Special" EntitySet="Specials" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionBreakfast" Association="Model1.Store.MenuSectionBreakfast">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Breakfast" EntitySet="Breakfasts" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionSide" Association="Model1.Store.MenuSectionSide">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Side" EntitySet="Sides" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionSauce" Association="Model1.Store.MenuSectionSauce">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Sauce" EntitySet="Sauces" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSpecial" Association="Model1.Store.RestaurantSpecial">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Special" EntitySet="Specials" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantBreakfast" Association="Model1.Store.RestaurantBreakfast">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Breakfast" EntitySet="Breakfasts" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSide" Association="Model1.Store.RestaurantSide">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Side" EntitySet="Sides" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSauce" Association="Model1.Store.RestaurantSauce">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Sauce" EntitySet="Sauces" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileImageUser" Association="Model1.Store.ProfileImageUser">
+      <End Role="ProfileImage" EntitySet="ProfileImages" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users">
     <Key>
@@ -130,6 +171,10 @@
     <Property Name="OtherId" Type="int" Nullable="true" />
     <Property Name="EntreeId" Type="int" Nullable="true" />
     <Property Name="Entity1Id" Type="int" Nullable="false" />
+    <Property Name="SpecialId" Type="int" Nullable="true" />
+    <Property Name="BreakfastId" Type="int" Nullable="true" />
+    <Property Name="SideId" Type="int" Nullable="true" />
+    <Property Name="SauceId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="FoodItems">
     <Key>
@@ -151,6 +196,9 @@
     <Property Name="Review" Type="nvarchar(max)" Nullable="true" />
     <Property Name="FoodItemId" Type="int" Nullable="false" />
     <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="RestaurantName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RestaurantId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Photos">
     <Key>
@@ -159,6 +207,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FoodItemId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Entrees">
@@ -195,6 +244,42 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sides">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Breakfasts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sauces">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfileImages">
+    <Key>
+      <PropertyRef Name="ProfileImageId" />
+    </Key>
+    <Property Name="ProfileImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="MenuSectionFoodItem">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="1">
@@ -411,6 +496,114 @@
       </Principal>
       <Dependent Role="Appetizer">
         <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionSpecial">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Special">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SpecialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionBreakfast">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Breakfast">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="BreakfastId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionSide">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Side">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionSauce">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sauce">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SauceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSpecial">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Special">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantBreakfast">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Breakfast">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSide">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Side">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSauce">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sauce">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileImageUser">
+    <End Role="ProfileImage" Type="Model1.Store.ProfileImages" Multiplicity="*" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProfileImage">
+        <PropertyRef Name="User_UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

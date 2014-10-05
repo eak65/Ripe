@@ -17,6 +17,7 @@ namespace Ripe.Models
         public int Id { get; set; }
         public string URI { get; set; }
         public int FoodItemId { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual User User { get; set; }
         public virtual FoodItem FoodItem { get; set; }

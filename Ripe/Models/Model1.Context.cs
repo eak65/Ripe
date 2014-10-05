@@ -37,5 +37,10 @@ namespace Ripe.Models
         public virtual DbSet<Other> Other { get; set; }
         public virtual DbSet<Drink> Drinks { get; set; }
         public virtual DbSet<Dessert> Desserts { get; set; }
+        public virtual DbSet<Side> Sides { get; set; }
+        public virtual DbSet<Breakfast> Breakfasts { get; set; }
+        public virtual DbSet<Sauce> Sauces { get; set; }
+        public virtual DbSet<Special> Specials { get; set; }
+        public virtual DbSet<ProfileImage> ProfileImages { get; set; }
     }
 }

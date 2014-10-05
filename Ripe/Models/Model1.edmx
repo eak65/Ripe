@@ -18,6 +18,11 @@
     <EntitySet Name="Other" EntityType="Model1.Store.Other" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Drinks" EntityType="Model1.Store.Drinks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Desserts" EntityType="Model1.Store.Desserts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sides" EntityType="Model1.Store.Sides" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Breakfasts" EntityType="Model1.Store.Breakfasts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sauces" EntityType="Model1.Store.Sauces" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specials" EntityType="Model1.Store.Specials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProfileImages" EntityType="Model1.Store.ProfileImages" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="MenuSectionFoodItem" Association="Model1.Store.MenuSectionFoodItem">
       <End Role="MenuSection" EntitySet="MenuSections" />
       <End Role="FoodItem" EntitySet="FoodItems" />
@@ -86,6 +91,42 @@
       <End Role="Appetizer" EntitySet="Appetizers" />
       <End Role="Restaurant" EntitySet="Restaurants" />
     </AssociationSet>
+    <AssociationSet Name="MenuSectionSpecial" Association="Model1.Store.MenuSectionSpecial">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Special" EntitySet="Specials" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionBreakfast" Association="Model1.Store.MenuSectionBreakfast">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Breakfast" EntitySet="Breakfasts" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionSide" Association="Model1.Store.MenuSectionSide">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Side" EntitySet="Sides" />
+    </AssociationSet>
+    <AssociationSet Name="MenuSectionSauce" Association="Model1.Store.MenuSectionSauce">
+      <End Role="MenuSection" EntitySet="MenuSections" />
+      <End Role="Sauce" EntitySet="Sauces" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSpecial" Association="Model1.Store.RestaurantSpecial">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Special" EntitySet="Specials" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantBreakfast" Association="Model1.Store.RestaurantBreakfast">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Breakfast" EntitySet="Breakfasts" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSide" Association="Model1.Store.RestaurantSide">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Side" EntitySet="Sides" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantSauce" Association="Model1.Store.RestaurantSauce">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="Sauce" EntitySet="Sauces" />
+    </AssociationSet>
+    <AssociationSet Name="ProfileImageUser" Association="Model1.Store.ProfileImageUser">
+      <End Role="ProfileImage" EntitySet="ProfileImages" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users">
     <Key>
@@ -135,6 +176,10 @@
     <Property Name="OtherId" Type="int" Nullable="true" />
     <Property Name="EntreeId" Type="int" Nullable="true" />
     <Property Name="Entity1Id" Type="int" Nullable="false" />
+    <Property Name="SpecialId" Type="int" Nullable="true" />
+    <Property Name="BreakfastId" Type="int" Nullable="true" />
+    <Property Name="SideId" Type="int" Nullable="true" />
+    <Property Name="SauceId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="FoodItems">
     <Key>
@@ -156,6 +201,9 @@
     <Property Name="Review" Type="nvarchar(max)" Nullable="true" />
     <Property Name="FoodItemId" Type="int" Nullable="false" />
     <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="RestaurantName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RestaurantId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Photos">
     <Key>
@@ -164,6 +212,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FoodItemId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Entrees">
@@ -200,6 +249,42 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sides">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Breakfasts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sauces">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProfileImages">
+    <Key>
+      <PropertyRef Name="ProfileImageId" />
+    </Key>
+    <Property Name="ProfileImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="MenuSectionFoodItem">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="1">
@@ -419,6 +504,114 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="MenuSectionSpecial">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Special">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SpecialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionBreakfast">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Breakfast">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="BreakfastId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionSide">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Side">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MenuSectionSauce">
+    <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
+    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sauce">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuSection">
+        <PropertyRef Name="SauceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSpecial">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Special">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantBreakfast">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Breakfast">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSide">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Side">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RestaurantSauce">
+    <End Role="Restaurant" Type="Model1.Store.Restaurants" Multiplicity="1" />
+    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sauce">
+        <PropertyRef Name="Restaurant_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProfileImageUser">
+    <End Role="ProfileImage" Type="Model1.Store.ProfileImages" Multiplicity="*" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProfileImage">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -504,6 +697,47 @@
             <End Role="Appetizer" EntitySet="Appetizers" />
             <End Role="Restaurant" EntitySet="Restaurants" />
           </AssociationSet>
+          <EntitySet Name="Sides" EntityType="Model1.Side" />
+          <EntitySet Name="Breakfasts" EntityType="Model1.Breakfast" />
+          <EntitySet Name="Sauces" EntityType="Model1.Sauce" />
+          <EntitySet Name="Specials" EntityType="Model1.Special" />
+          <AssociationSet Name="MenuSectionSpecial" Association="Model1.MenuSectionSpecial">
+            <End Role="MenuSection" EntitySet="MenuSections" />
+            <End Role="Special" EntitySet="Specials" />
+          </AssociationSet>
+          <AssociationSet Name="MenuSectionBreakfast" Association="Model1.MenuSectionBreakfast">
+            <End Role="MenuSection" EntitySet="MenuSections" />
+            <End Role="Breakfast" EntitySet="Breakfasts" />
+          </AssociationSet>
+          <AssociationSet Name="MenuSectionSide" Association="Model1.MenuSectionSide">
+            <End Role="MenuSection" EntitySet="MenuSections" />
+            <End Role="Side" EntitySet="Sides" />
+          </AssociationSet>
+          <AssociationSet Name="MenuSectionSauce" Association="Model1.MenuSectionSauce">
+            <End Role="MenuSection" EntitySet="MenuSections" />
+            <End Role="Sauce" EntitySet="Sauces" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantSpecial" Association="Model1.RestaurantSpecial">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Special" EntitySet="Specials" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantBreakfast" Association="Model1.RestaurantBreakfast">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Breakfast" EntitySet="Breakfasts" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantSide" Association="Model1.RestaurantSide">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Side" EntitySet="Sides" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantSauce" Association="Model1.RestaurantSauce">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Sauce" EntitySet="Sauces" />
+          </AssociationSet>
+          <EntitySet Name="ProfileImages" EntityType="Model1.ProfileImage" />
+          <AssociationSet Name="ProfileImageUser" Association="Model1.ProfileImageUser">
+            <End Role="ProfileImage" EntitySet="ProfileImages" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -518,6 +752,7 @@
           <Property Name="LastName" Type="String" Nullable="false" />
           <Property Name="Sex" Type="String" Nullable="false" />
           <Property Name="Location" Type="Geography" Nullable="false" />
+          <NavigationProperty Name="ProfileImage" Relationship="Model1.ProfileImageUser" FromRole="User" ToRole="ProfileImage" />
         </EntityType>
         <EntityType Name="Appetizer">
           <Key>
@@ -548,6 +783,10 @@
           <Property Name="zip" Type="String" Nullable="false" />
           <NavigationProperty Name="Appetizer" Relationship="Model1.AppetizerRestaurant" FromRole="Restaurant" ToRole="Appetizer" />
           <Property Name="googleId" Type="String" Nullable="true" />
+          <NavigationProperty Name="Special" Relationship="Model1.RestaurantSpecial" FromRole="Restaurant" ToRole="Special" />
+          <NavigationProperty Name="Breakfast" Relationship="Model1.RestaurantBreakfast" FromRole="Restaurant" ToRole="Breakfast" />
+          <NavigationProperty Name="Side" Relationship="Model1.RestaurantSide" FromRole="Restaurant" ToRole="Side" />
+          <NavigationProperty Name="Sauce" Relationship="Model1.RestaurantSauce" FromRole="Restaurant" ToRole="Sauce" />
         </EntityType>
         <EntityType Name="MenuSection">
           <Key>
@@ -569,6 +808,14 @@
           <NavigationProperty Name="Entree" Relationship="Model1.EntreeMenuSection" FromRole="MenuSection" ToRole="Entree" />
           <Property Name="EntreeId" Type="Int32" Nullable="true" />
           <Property Name="Entity1Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Special" Relationship="Model1.MenuSectionSpecial" FromRole="MenuSection" ToRole="Special" />
+          <Property Name="SpecialId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Breakfast" Relationship="Model1.MenuSectionBreakfast" FromRole="MenuSection" ToRole="Breakfast" />
+          <Property Name="BreakfastId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Side" Relationship="Model1.MenuSectionSide" FromRole="MenuSection" ToRole="Side" />
+          <Property Name="SideId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Sauce" Relationship="Model1.MenuSectionSauce" FromRole="MenuSection" ToRole="Sauce" />
+          <Property Name="SauceId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="FoodItem">
           <Key>
@@ -609,6 +856,9 @@
           <Property Name="FoodItemId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Model1.UserRating" FromRole="Rating" ToRole="User" />
           <Property Name="UserUserId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="RestaurantName" Type="String" Nullable="false" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FoodItemRating">
           <End Type="Model1.FoodItem" Role="FoodItem" Multiplicity="1" >
@@ -645,6 +895,7 @@
           <NavigationProperty Name="User" Relationship="Model1.PhotoUser" FromRole="Photo" ToRole="User" />
           <NavigationProperty Name="FoodItem" Relationship="Model1.FoodItemPhoto" FromRole="Photo" ToRole="FoodItem" />
           <Property Name="FoodItemId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <Association Name="PhotoUser">
           <End Type="Model1.Photo" Role="Photo" Multiplicity="*" >
@@ -818,6 +1069,114 @@
           <End Type="Model1.Appetizer" Role="Appetizer" Multiplicity="0..1" />
           <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
         </Association>
+        <EntityType Name="Side">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MenuSections" Relationship="Model1.MenuSectionSide" FromRole="Side" ToRole="MenuSection" />
+          <NavigationProperty Name="Restaurant" Relationship="Model1.RestaurantSide" FromRole="Side" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Breakfast">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MenuSections" Relationship="Model1.MenuSectionBreakfast" FromRole="Breakfast" ToRole="MenuSection" />
+          <NavigationProperty Name="Restaurant" Relationship="Model1.RestaurantBreakfast" FromRole="Breakfast" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Sauce">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MenuSections" Relationship="Model1.MenuSectionSauce" FromRole="Sauce" ToRole="MenuSection" />
+          <NavigationProperty Name="Restaurant" Relationship="Model1.RestaurantSauce" FromRole="Sauce" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MenuSections" Relationship="Model1.MenuSectionSpecial" FromRole="Special" ToRole="MenuSection" />
+          <NavigationProperty Name="Restaurant" Relationship="Model1.RestaurantSpecial" FromRole="Special" ToRole="Restaurant" />
+        </EntityType>
+        <Association Name="MenuSectionSpecial">
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
+          <End Type="Model1.Special" Role="Special" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Special">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuSection">
+              <PropertyRef Name="SpecialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuSectionBreakfast">
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
+          <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Breakfast">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuSection">
+              <PropertyRef Name="BreakfastId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuSectionSide">
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
+          <End Type="Model1.Side" Role="Side" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Side">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuSection">
+              <PropertyRef Name="SideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MenuSectionSauce">
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
+          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sauce">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuSection">
+              <PropertyRef Name="SauceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RestaurantSpecial">
+          <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="Model1.Special" Role="Special" Multiplicity="0..1" />
+        </Association>
+        <Association Name="RestaurantBreakfast">
+          <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1" />
+        </Association>
+        <Association Name="RestaurantSide">
+          <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="Model1.Side" Role="Side" Multiplicity="0..1" />
+        </Association>
+        <Association Name="RestaurantSauce">
+          <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="ProfileImage">
+          <Key>
+            <PropertyRef Name="ProfileImageId" />
+          </Key>
+          <Property Name="ProfileImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="Model1.ProfileImageUser" FromRole="ProfileImage" ToRole="User" />
+          <Property Name="URI" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ProfileImageUser">
+          <End Type="Model1.ProfileImage" Role="ProfileImage" Multiplicity="0..1" />
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -873,6 +1232,10 @@
           <ScalarProperty Name="OtherId" ColumnName="OtherId" />
           <ScalarProperty Name="EntreeId" ColumnName="EntreeId" />
           <ScalarProperty Name="Entity1Id" ColumnName="Entity1Id" />
+          <ScalarProperty Name="SpecialId" ColumnName="SpecialId" />
+          <ScalarProperty Name="BreakfastId" ColumnName="BreakfastId" />
+          <ScalarProperty Name="SideId" ColumnName="SideId" />
+          <ScalarProperty Name="SauceId" ColumnName="SauceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -896,6 +1259,9 @@
           <ScalarProperty Name="Review" ColumnName="Review" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
           <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -905,6 +1271,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="URI" ColumnName="URI" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -940,6 +1307,42 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Dessert)">
         <MappingFragment StoreEntitySet="Desserts">
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sides">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Side)">
+        <MappingFragment StoreEntitySet="Sides">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Breakfasts">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Breakfast)">
+        <MappingFragment StoreEntitySet="Breakfasts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sauces">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sauce)">
+        <MappingFragment StoreEntitySet="Sauces">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specials">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Special)">
+        <MappingFragment StoreEntitySet="Specials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfileImages">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ProfileImage)">
+        <MappingFragment StoreEntitySet="ProfileImages">
+          <ScalarProperty Name="ProfileImageId" ColumnName="ProfileImageId" />
+          <ScalarProperty Name="URI" ColumnName="URI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -997,6 +1400,46 @@
       </EndProperty>
       <EndProperty Name="Appetizer">
         <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSpecial" TypeName="Model1.RestaurantSpecial" StoreEntitySet="Specials">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Special">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantBreakfast" TypeName="Model1.RestaurantBreakfast" StoreEntitySet="Breakfasts">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Breakfast">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSide" TypeName="Model1.RestaurantSide" StoreEntitySet="Sides">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Side">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RestaurantSauce" TypeName="Model1.RestaurantSauce" StoreEntitySet="Sauces">
+      <EndProperty Name="Restaurant">
+        <ScalarProperty Name="Id" ColumnName="Restaurant_Id" />
+      </EndProperty>
+      <EndProperty Name="Sauce">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProfileImageUser" TypeName="Model1.ProfileImageUser" StoreEntitySet="ProfileImages">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="User_UserId" />
+      </EndProperty>
+      <EndProperty Name="ProfileImage">
+        <ScalarProperty Name="ProfileImageId" ColumnName="ProfileImageId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

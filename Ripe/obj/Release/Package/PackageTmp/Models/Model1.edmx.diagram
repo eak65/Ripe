@@ -34,6 +34,20 @@
         <AssociationConnector Association="Model1.FoodItemPhoto" />
         <AssociationConnector Association="Model1.EntreeMenuSection" />
         <AssociationConnector Association="Model1.AppetizerRestaurant" />
+        <EntityTypeShape EntityType="Model1.Side" Width="1.5" PointX="25.25" PointY="6.75" />
+        <EntityTypeShape EntityType="Model1.Breakfast" Width="1.5" PointX="25.875" PointY="4.75" />
+        <EntityTypeShape EntityType="Model1.Sauce" Width="1.5" PointX="23.875" PointY="9.625" />
+        <EntityTypeShape EntityType="Model1.Special" Width="1.5" PointX="27" PointY="2.75" />
+        <AssociationConnector Association="Model1.MenuSectionSpecial" />
+        <AssociationConnector Association="Model1.MenuSectionBreakfast" />
+        <AssociationConnector Association="Model1.MenuSectionSide" />
+        <AssociationConnector Association="Model1.MenuSectionSauce" />
+        <AssociationConnector Association="Model1.RestaurantSpecial" />
+        <AssociationConnector Association="Model1.RestaurantBreakfast" />
+        <AssociationConnector Association="Model1.RestaurantSide" />
+        <AssociationConnector Association="Model1.RestaurantSauce" />
+        <EntityTypeShape EntityType="Model1.ProfileImage" Width="1.5" PointX="10.875" PointY="0.625" />
+        <AssociationConnector Association="Model1.ProfileImageUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

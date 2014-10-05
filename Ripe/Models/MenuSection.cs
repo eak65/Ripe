@@ -28,6 +28,10 @@ namespace Ripe.Models
         public Nullable<int> OtherId { get; set; }
         public Nullable<int> EntreeId { get; set; }
         public int Entity1Id { get; set; }
+        public Nullable<int> SpecialId { get; set; }
+        public Nullable<int> BreakfastId { get; set; }
+        public Nullable<int> SideId { get; set; }
+        public Nullable<int> SauceId { get; set; }
     
         public virtual ICollection<FoodItem> FoodItems { get; set; }
         public virtual Dessert Dessert { get; set; }
@@ -36,5 +40,9 @@ namespace Ripe.Models
         public virtual Appetizer Appetizer { get; set; }
         public virtual Other Other { get; set; }
         public virtual Entree Entree { get; set; }
+        public virtual Special Special { get; set; }
+        public virtual Breakfast Breakfast { get; set; }
+        public virtual Side Side { get; set; }
+        public virtual Sauce Sauce { get; set; }
     }
 }

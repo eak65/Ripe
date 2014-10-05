@@ -6,11 +6,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Ripe.Models;
+using Newtonsoft.Json;
 namespace Ripe.Controllers
 {
     public class FoodItemController : ApiController
     {
- /*      public HttpResponseMessage GetReviews(JObject review)
+     public HttpResponseMessage GetReviews(JObject review)
         {
             int foodItemId = review["foodItemId"].ToObject<int>();
 
@@ -19,13 +20,15 @@ namespace Ripe.Controllers
                 FoodItem foodItem = db.FoodItems.Find(foodItemId);
                 if (foodItem != null)
                 {
+                    JArray foodItems = JArray.Parse(JsonConvert.SerializeObject(foodItem.Ratings.ToList()));
+                    return Request.CreateResponse<JArray>(HttpStatusCode.OK, foodItems);
                 }
                 else
                 {
                     return Request.CreateResponse(HttpStatusCode.NoContent);
                 }
             }
-        }*/
+        }
 
         public HttpResponseMessage PostReview(JObject review)
         {
@@ -53,17 +56,21 @@ namespace Ripe.Controllers
                         }
                     else // rating not found so post it
                     {
-                        Rating rate = new Rating();
+                        rating = new Rating();
+                        rating.Date = DateTime.UtcNow;
                         User person = db.Users.Find(userId);
                         if (person == null)
                             return Request.CreateResponse(HttpStatusCode.NotFound);
-                        rate.Score = score;
+                        rating.Score = score;
                         if(!reviewText.Equals(""))
                         {
-                            rate.Review = reviewText;
-                        } person.Ratings.Add(rate);
-                        foodItem.Ratings.Add(rate);
-                        db.Ratings.Add(rate);
+                            rating.Review = reviewText;
+                        }
+                        rating.RestaurantName = foodItem.MenuSection.Appetizer.Restaurant.Name;
+
+                        person.Ratings.Add(rating);
+                        foodItem.Ratings.Add(rating);
+                        db.Ratings.Add(rating);
                    
 
                     }
