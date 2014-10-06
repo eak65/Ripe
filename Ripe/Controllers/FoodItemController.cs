@@ -36,7 +36,7 @@ namespace Ripe.Controllers
            int foodItemId = review["foodItemId"].ToObject<int>();
            String reviewText = review["reviewText"].ToObject<String>();
            int score = review["score"].ToObject<int>();
-     
+           String restaurantName=review["restaurantName"].ToObject<String>();
             using(var db = new Model1Container())
             {
               
@@ -66,7 +66,7 @@ namespace Ripe.Controllers
                         {
                             rating.Review = reviewText;
                         }
-                        rating.RestaurantName = foodItem.MenuSection.Appetizer.Restaurant.Name;
+                        rating.RestaurantName = restaurantName;
 
                         person.Ratings.Add(rating);
                         foodItem.Ratings.Add(rating);
