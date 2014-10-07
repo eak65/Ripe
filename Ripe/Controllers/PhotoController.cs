@@ -119,17 +119,21 @@ namespace Ripe.Controllers
                            var testName = content.Headers.ContentDisposition.Name;
                            String[] headerValues = (String[])Request.Headers.GetValues("foodId");
                            String[] headerValues1 = (String[])Request.Headers.GetValues("userId");
+                           String[] headerValues2 = (String[])Request.Headers.GetValues("restaurantId");
                            int userId = Int32.Parse(headerValues1[0]);
                            int foodId = Int32.Parse(headerValues[0]);
+                           int restaurantId = Int32.Parse(headerValues2[0]);
            using (var db = new Model1Container())
            {
                FoodItem foodItem=db.FoodItems.Find(foodId);
                User user = db.Users.Find(userId);
-                      
+               Restaurant r = db.Restaurants.Find(restaurantId);
                        Photo photo = new Photo();
                        photo.User = user;
                        photo.Date = DateTime.UtcNow;
-                
+                       photo.RestaurantName = r.Name;
+                       photo.FoodName = foodItem.Name;
+                       photo.RestaurantId = r.Id;
                            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                           ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
                            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();

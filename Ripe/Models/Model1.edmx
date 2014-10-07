@@ -896,6 +896,9 @@
           <NavigationProperty Name="FoodItem" Relationship="Model1.FoodItemPhoto" FromRole="Photo" ToRole="FoodItem" />
           <Property Name="FoodItemId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="RestaurantName" Type="String" Nullable="false" />
+          <Property Name="FoodName" Type="String" Nullable="false" />
+          <Property Name="RestaurantId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="PhotoUser">
           <End Type="Model1.Photo" Role="Photo" Multiplicity="*" >

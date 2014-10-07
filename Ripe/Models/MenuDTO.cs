@@ -165,12 +165,16 @@ namespace Ripe.Models
                 this.URI = p.URI;
                 this.Date = p.Date;
                this.FoodItemId= p.FoodItemId;
+               this.FoodName = p.FoodName;
+               this.RestaurantName = p.RestaurantName;
             }
 
             public String URI { get; set; }
             public DateTime Date { get; set; }
             public int FoodItemId { get; set; }
-
+            public String FoodName { get; set; }
+            public String RestaurantName { get; set; }
+          
     }
 
 
