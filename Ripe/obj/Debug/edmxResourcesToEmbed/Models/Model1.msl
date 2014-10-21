@@ -90,6 +90,9 @@
           <ScalarProperty Name="URI" ColumnName="URI" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
+          <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

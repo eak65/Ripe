@@ -278,6 +278,9 @@
     <NavigationProperty Name="FoodItem" Relationship="Model1.FoodItemPhoto" FromRole="Photo" ToRole="FoodItem" />
     <Property Name="FoodItemId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" />
+    <Property Name="RestaurantName" Type="String" Nullable="false" />
+    <Property Name="FoodName" Type="String" Nullable="false" />
+    <Property Name="RestaurantId" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="PhotoUser">
     <End Type="Model1.Photo" Role="Photo" Multiplicity="*" />
@@ -477,7 +480,9 @@
   </EntityType>
   <Association Name="MenuSectionSpecial">
     <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-    <End Type="Model1.Special" Role="Special" Multiplicity="0..1" />
+    <End Type="Model1.Special" Role="Special" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Special">
         <PropertyRef Name="Id" />
@@ -489,7 +494,9 @@
   </Association>
   <Association Name="MenuSectionBreakfast">
     <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-    <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1" />
+    <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Breakfast">
         <PropertyRef Name="Id" />
@@ -501,7 +508,9 @@
   </Association>
   <Association Name="MenuSectionSide">
     <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-    <End Type="Model1.Side" Role="Side" Multiplicity="0..1" />
+    <End Type="Model1.Side" Role="Side" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Side">
         <PropertyRef Name="Id" />
@@ -513,7 +522,9 @@
   </Association>
   <Association Name="MenuSectionSauce">
     <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-    <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" />
+    <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Sauce">
         <PropertyRef Name="Id" />

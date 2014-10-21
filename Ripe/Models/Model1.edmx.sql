@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/02/2014 14:47:57
+-- Date Created: 10/07/2014 22:52:17
 -- Generated from EDMX file: C:\Users\Ethan\Documents\Visual Studio 2013\Projects\Ripe\Ripe\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -239,6 +239,9 @@ CREATE TABLE [dbo].[Photos] (
     [URI] nvarchar(max)  NOT NULL,
     [FoodItemId] int  NOT NULL,
     [Date] datetime  NOT NULL,
+    [RestaurantName] nvarchar(max)  NOT NULL,
+    [FoodName] nvarchar(max)  NOT NULL,
+    [RestaurantId] int  NOT NULL,
     [User_UserId] int  NOT NULL
 );
 GO
@@ -668,7 +671,7 @@ ADD CONSTRAINT [FK_MenuSectionSpecial]
     FOREIGN KEY ([SpecialId])
     REFERENCES [dbo].[Specials]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSpecial'
 CREATE INDEX [IX_FK_MenuSectionSpecial]
@@ -682,7 +685,7 @@ ADD CONSTRAINT [FK_MenuSectionBreakfast]
     FOREIGN KEY ([BreakfastId])
     REFERENCES [dbo].[Breakfasts]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionBreakfast'
 CREATE INDEX [IX_FK_MenuSectionBreakfast]
@@ -696,7 +699,7 @@ ADD CONSTRAINT [FK_MenuSectionSide]
     FOREIGN KEY ([SideId])
     REFERENCES [dbo].[Sides]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSide'
 CREATE INDEX [IX_FK_MenuSectionSide]
@@ -710,7 +713,7 @@ ADD CONSTRAINT [FK_MenuSectionSauce]
     FOREIGN KEY ([SauceId])
     REFERENCES [dbo].[Sauces]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_MenuSectionSauce'
 CREATE INDEX [IX_FK_MenuSectionSauce]

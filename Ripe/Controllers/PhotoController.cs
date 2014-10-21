@@ -65,6 +65,7 @@ namespace Ripe.Controllers
 
                             ProfileImage photo = new ProfileImage();
                             photo.User = user;
+                  
 
 
                             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
@@ -81,15 +82,15 @@ namespace Ripe.Controllers
                                     BlobContainerPublicAccessType.Blob
                             });
 
-                            string uniqueBlobName = string.Format("/image_{0}.png",userId);
+                            string uniqueBlobName = string.Format("image_{0}.png",userId);
                             CloudBlockBlob blob = container.GetBlockBlobReference(uniqueBlobName);
                             photo.URI = blob.Uri.ToString();
+                            user.ProfileImage = photo;
                             var streamOut = new System.IO.MemoryStream();
                             image.Save(streamOut, ImageFormat.Png);
                             streamOut.Position = 0;
-
-                            blob.UploadFromStream(streamOut);
                             db.SaveChanges();
+                            blob.UploadFromStream(streamOut);
                             streamOut.Close();
                             stream.Close();
 
@@ -122,12 +123,13 @@ namespace Ripe.Controllers
                            String[] headerValues2 = (String[])Request.Headers.GetValues("restaurantId");
                            int userId = Int32.Parse(headerValues1[0]);
                            int foodId = Int32.Parse(headerValues[0]);
-                           int restaurantId = Int32.Parse(headerValues2[0]);
+                           String restaurantId = (headerValues2[0]);
            using (var db = new Model1Container())
            {
                FoodItem foodItem=db.FoodItems.Find(foodId);
                User user = db.Users.Find(userId);
-               Restaurant r = db.Restaurants.Find(restaurantId);
+               Restaurant r = db.Restaurants.Where(rest => rest.LocuId == restaurantId).FirstOrDefault();
+
                        Photo photo = new Photo();
                        photo.User = user;
                        photo.Date = DateTime.UtcNow;

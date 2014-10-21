@@ -213,6 +213,9 @@
     <Property Name="URI" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FoodItemId" Type="int" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="RestaurantName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FoodName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RestaurantId" Type="int" Nullable="false" />
     <Property Name="User_UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Entrees">
@@ -506,7 +509,9 @@
   </Association>
   <Association Name="MenuSectionSpecial">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
-    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="0..1" />
+    <End Role="Special" Type="Model1.Store.Specials" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Special">
         <PropertyRef Name="Id" />
@@ -518,7 +523,9 @@
   </Association>
   <Association Name="MenuSectionBreakfast">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
-    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="0..1" />
+    <End Role="Breakfast" Type="Model1.Store.Breakfasts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Breakfast">
         <PropertyRef Name="Id" />
@@ -530,7 +537,9 @@
   </Association>
   <Association Name="MenuSectionSide">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
-    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="0..1" />
+    <End Role="Side" Type="Model1.Store.Sides" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Side">
         <PropertyRef Name="Id" />
@@ -542,7 +551,9 @@
   </Association>
   <Association Name="MenuSectionSauce">
     <End Role="MenuSection" Type="Model1.Store.MenuSections" Multiplicity="*" />
-    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="0..1" />
+    <End Role="Sauce" Type="Model1.Store.Sauces" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <ReferentialConstraint>
       <Principal Role="Sauce">
         <PropertyRef Name="Id" />
@@ -1105,8 +1116,11 @@
           <NavigationProperty Name="Restaurant" Relationship="Model1.RestaurantSpecial" FromRole="Special" ToRole="Restaurant" />
         </EntityType>
         <Association Name="MenuSectionSpecial">
-          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-          <End Type="Model1.Special" Role="Special" Multiplicity="0..1" />
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" >
+          </End>
+          <End Type="Model1.Special" Role="Special" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <ReferentialConstraint>
             <Principal Role="Special">
               <PropertyRef Name="Id" />
@@ -1118,7 +1132,9 @@
         </Association>
         <Association Name="MenuSectionBreakfast">
           <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-          <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1" />
+          <End Type="Model1.Breakfast" Role="Breakfast" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <ReferentialConstraint>
             <Principal Role="Breakfast">
               <PropertyRef Name="Id" />
@@ -1130,7 +1146,9 @@
         </Association>
         <Association Name="MenuSectionSide">
           <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-          <End Type="Model1.Side" Role="Side" Multiplicity="0..1" />
+          <End Type="Model1.Side" Role="Side" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <ReferentialConstraint>
             <Principal Role="Side">
               <PropertyRef Name="Id" />
@@ -1141,8 +1159,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MenuSectionSauce">
-          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" />
-          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" />
+          <End Type="Model1.MenuSection" Role="MenuSection" Multiplicity="*" >
+          </End>
+          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <ReferentialConstraint>
             <Principal Role="Sauce">
               <PropertyRef Name="Id" />
@@ -1166,7 +1187,8 @@
         </Association>
         <Association Name="RestaurantSauce">
           <End Type="Model1.Restaurant" Role="Restaurant" Multiplicity="1" />
-          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" />
+          <End Type="Model1.Sauce" Role="Sauce" Multiplicity="0..1" >
+          </End>
         </Association>
         <EntityType Name="ProfileImage">
           <Key>
@@ -1275,6 +1297,9 @@
           <ScalarProperty Name="URI" ColumnName="URI" />
           <ScalarProperty Name="FoodItemId" ColumnName="FoodItemId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="RestaurantName" ColumnName="RestaurantName" />
+          <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
